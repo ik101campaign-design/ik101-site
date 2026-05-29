@@ -1,9 +1,10 @@
 :root {
-  --cream: #f4efe9;
-  --cream-dim: rgba(244, 239, 233, 0.66);
-  --cream-faint: rgba(244, 239, 233, 0.12);
-  --ink: #20262c;
-  --accent: #00bf63;          /* sparks */
+  --ink: #16201b;            /* dark, faintly green near-black */
+  --muted: #5a6b62;          /* gray-green secondary */
+  --faint: rgba(20, 40, 28, 0.12);
+  --accent: #00bf63;         /* brand green */
+  --accent-soft: rgba(0, 191, 99, 0.08);
+  --cream: #ffffff;
   --font-sans: 'Hanken Grotesk', system-ui, sans-serif;
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -14,30 +15,10 @@ body {
   margin: 0;
   min-height: 100vh;
   font-family: var(--font-sans);
-  color: var(--cream);
-  /* Cool slate top melting into warm dusk rose at the bottom */
-  background: linear-gradient(
-    179deg,
-    #1f252b 0%,
-    #262c33 32%,
-    #3f3a44 52%,
-    #6f5a59 70%,
-    #9c7d72 84%,
-    #c6a492 95%,
-    #d0ac99 100%
-  );
-  background-attachment: fixed;
-}
-/* fine grain so the gradient doesn't band */
-body::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 5;
-  opacity: 0.05;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-size: 200px 200px;
+  color: var(--ink);
+  /* white "sky" melting into a band of golf-green grass at the base,
+     where the globe rises out of the green */
+  background: linear-gradient(180deg, #ffffff 0%, #ffffff 30%, #eaf5ec 55%, #97cca0 78%, #34a35a 100%);
 }
 
 /* Nav */
@@ -49,17 +30,17 @@ body::after {
   justify-content: space-between;
   padding: 1.6rem clamp(1.5rem, 4vw, 3rem);
 }
-.nav__logo { font-weight: 700; font-size: 1.1rem; letter-spacing: 0.05em; color: var(--cream); text-decoration: none; }
+.nav__logo { font-weight: 700; font-size: 1.1rem; letter-spacing: 0.05em; color: var(--ink); text-decoration: none; }
 .nav__links { display: flex; gap: 2.2rem; }
-.nav__links a { font-size: 0.95rem; color: var(--cream-dim); text-decoration: none; transition: color 0.2s var(--ease-out); }
-.nav__links a:hover { color: var(--cream); }
+.nav__links a { font-size: 0.95rem; color: var(--muted); text-decoration: none; transition: color 0.2s var(--ease-out); }
+.nav__links a:hover { color: var(--ink); }
 .nav__cta {
-  font-family: inherit; font-size: 0.9rem; font-weight: 500;
-  color: var(--ink); background: var(--cream);
+  font-family: inherit; font-size: 0.9rem; font-weight: 600;
+  color: var(--ink); background: var(--accent);
   border: 0; border-radius: 100px; padding: 0.6rem 1.3rem; cursor: pointer;
-  transition: background 0.2s var(--ease-out);
+  transition: transform 0.2s var(--ease-out), filter 0.2s var(--ease-out);
 }
-.nav__cta:hover { background: #fff; }
+.nav__cta:hover { filter: brightness(1.05); }
 
 /* Hero — centered stack */
 .hero {
@@ -77,61 +58,60 @@ body::after {
   display: inline-flex; align-items: center; gap: 0.7rem;
   margin-bottom: 2.6rem;
   padding: 0.4rem 0.45rem 0.4rem 1.05rem;
-  font-size: 0.85rem; color: var(--cream-dim); text-decoration: none;
-  background: rgba(244, 239, 233, 0.06);
-  border: 1px solid var(--cream-faint);
+  font-size: 0.85rem; color: var(--ink); text-decoration: none;
+  background: var(--accent-soft);
+  border: 1px solid rgba(0, 191, 99, 0.22);
   border-radius: 100px;
-  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
   transition: background 0.2s var(--ease-out);
 }
-.hero__pill:hover { background: rgba(244, 239, 233, 0.1); }
+.hero__pill:hover { background: rgba(0, 191, 99, 0.13); }
 .hero__pill-arrow {
   display: grid; place-items: center; width: 1.5rem; height: 1.5rem;
-  border-radius: 50%; background: rgba(244, 239, 233, 0.14); font-size: 0.8rem; color: var(--cream);
+  border-radius: 50%; background: var(--accent); color: #fff; font-size: 0.8rem;
 }
 
 .hero__title {
   margin: 0 0 1.6rem;
   max-width: 15ch;
-  font-weight: 500;
+  font-weight: 600;
   font-size: clamp(2.7rem, 6.2vw, 4.8rem);
   line-height: 1.05;
   letter-spacing: -0.025em;
-  color: var(--cream);
+  color: var(--ink);
 }
-.hero__title .accent { color: var(--cream); }
+.hero__title .accent { color: var(--muted); }
 
 .hero__subhead {
   margin: 0 0 2.5rem;
   max-width: 34ch;
   font-size: 1.1rem;
   line-height: 1.6;
-  color: var(--cream-dim);
+  color: var(--muted);
 }
 
 .hero__actions { display: flex; align-items: center; gap: 0.9rem; }
 .hero__cta {
-  font-family: inherit; font-weight: 500; font-size: 0.95rem;
-  color: var(--ink); background: var(--cream);
+  font-family: inherit; font-weight: 600; font-size: 0.95rem;
+  color: var(--ink); background: var(--accent);
   border: 0; border-radius: 100px; padding: 0.95rem 1.9rem; cursor: pointer;
-  transition: transform 0.2s var(--ease-out), background 0.2s var(--ease-out);
+  transition: transform 0.2s var(--ease-out), filter 0.2s var(--ease-out);
 }
-.hero__cta:hover { transform: translateY(-1px); background: #fff; }
+.hero__cta:hover { transform: translateY(-1px); filter: brightness(1.05); }
 .hero__cta-circle {
   display: grid; place-items: center; width: 3.1rem; height: 3.1rem;
-  border-radius: 50%; color: var(--cream); text-decoration: none; font-size: 1.15rem;
-  background: rgba(244, 239, 233, 0.08); border: 1px solid var(--cream-faint);
-  transition: background 0.2s var(--ease-out);
+  border-radius: 50%; color: var(--ink); text-decoration: none; font-size: 1.15rem;
+  background: #fff; border: 1px solid var(--faint);
+  transition: border-color 0.2s var(--ease-out);
 }
-.hero__cta-circle:hover { background: rgba(244, 239, 233, 0.16); }
+.hero__cta-circle:hover { border-color: var(--accent); }
 
 .hero__counter {
   margin: 2.1rem 0 0;
-  font-size: 0.82rem; letter-spacing: 0.07em; text-transform: lowercase; color: var(--cream-dim);
+  font-size: 0.82rem; letter-spacing: 0.07em; text-transform: lowercase; color: var(--muted);
 }
 .hero__counter b { color: var(--accent); font-weight: 600; }
 
-/* Globe — large, centered, glows on the dark gradient */
+/* Globe — large, centered, dark linework reads on white */
 .hero__globe {
   width: 100%;
   max-width: min(720px, 92vw);
