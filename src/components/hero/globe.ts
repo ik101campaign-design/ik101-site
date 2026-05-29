@@ -26,11 +26,11 @@ export function createGlobe(container: HTMLElement, onDotClick: (d: Dot) => void
   const globe = new ThreeGlobe()
     .showGlobe(false)
     .showAtmosphere(false)
-    .hexPolygonsData(land.features)
-    .hexPolygonResolution(3)
-    .hexPolygonMargin(0.7)
-    .hexPolygonUseDots(true)
-    .hexPolygonColor(() => 'rgba(90,107,98,0.55)'); // land hex dots
+    .polygonsData(land.features)
+    .polygonCapColor(() => 'rgba(0,0,0,0)')
+    .polygonSideColor(() => 'rgba(0,0,0,0)')
+    .polygonStrokeColor(() => 'rgba(90,107,98,0.6)')
+    .polygonAltitude(0.006); // faint coastline/border wireframe (Nutopia look)
 
   const scene = new THREE.Scene();
   scene.add(globe, new THREE.AmbientLight(0xffffff, 1));
