@@ -3,16 +3,31 @@ import { getEntry } from 'astro:content';
 const hero = await getEntry('hero', 'main');
 const c = hero.data;
 ---
+<header class="nav">
+  <a class="nav__logo" href="/">IK101</a>
+  <nav class="nav__links">
+    <a href="#">Spirit</a>
+    <a href="#">Resources</a>
+    <a href="#">Connect</a>
+  </nav>
+  <button class="nav__cta" data-globe-cta type="button">Add your voice</button>
+</header>
+
 <section class="hero">
-  <div class="hero__copy">
-    <p class="hero__eyebrow">{c.eyebrow}</p>
-    <h1 class="hero__title">{c.headline} <span class="accent">{c.headlineAccent}</span></h1>
-    <p class="hero__subhead">{c.subhead}</p>
+  <a class="hero__pill" href="#globe">
+    <span>{c.eyebrow}</span>
+    <span class="hero__pill-arrow">&#8594;</span>
+  </a>
+  <h1 class="hero__title">{c.headline} <span class="accent">{c.headlineAccent}</span></h1>
+  <p class="hero__subhead">{c.subhead}</p>
+  <div class="hero__actions">
     <button class="hero__cta" data-globe-cta type="button">{c.ctaLabel}</button>
-    <p class="hero__counter">VOICES: <b data-voices-count>—</b></p>
+    <a class="hero__cta-circle" href="#globe" aria-label="Scroll to the globe">&#8595;</a>
   </div>
-  <div class="hero__globe" data-globe data-pending-message={c.pendingMessage}></div>
+  <p class="hero__counter">voices: <b data-voices-count>&#8212;</b></p>
+  <div class="hero__globe" id="globe" data-globe data-pending-message={c.pendingMessage}></div>
 </section>
+
 <script>
   import('../components/hero/island.ts').then((m) => m.mountHero());
 </script>

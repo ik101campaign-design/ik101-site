@@ -13,7 +13,6 @@ import { containsProfanity } from '../../lib/profanity';
 export async function mountHero(): Promise<void> {
   const container = document.querySelector<HTMLElement>('[data-globe]');
   const countEl = document.querySelector<HTMLElement>('[data-voices-count]');
-  const cta = document.querySelector<HTMLElement>('[data-globe-cta]');
   if (!container) return;
 
   const handle = createGlobe(container, (d) => showPopover(container, d));
@@ -59,7 +58,7 @@ export async function mountHero(): Promise<void> {
       })
     .subscribe();
 
-  cta?.addEventListener('click', () => openForm(container, async (raw) => {
+  const openContribution = () => openForm(container, async (raw) => {
     const input = buildSubmission(raw);
     const v = validateSubmission(input, isValidCountryCode);
     if (!v.ok) return { ok: false, errors: v.errors };
@@ -77,7 +76,8 @@ export async function mountHero(): Promise<void> {
     );
     if (localDot) { addOptimistic(localDot); optimistic.push(localDot); render(localDot.id); }
     return { ok: true, errors: [] };
-  }));
+  });
+  document.querySelectorAll('[data-globe-cta]').forEach((btn) => btn.addEventListener('click', openContribution));
 }
 
 // ---------------------------------------------------------------------------
