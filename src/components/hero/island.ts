@@ -1,5 +1,5 @@
 import { createGlobe } from './globe';
-import { submitMessage, buildSubmission } from './contribution-form';
+import { buildSubmission } from './contribution-form';
 import { isValidCountryCode } from '../../lib/countries';
 import { COUNTRY_CENTROIDS } from '../../lib/countries-data';
 import { supabase } from '../../lib/supabase';
@@ -7,8 +7,8 @@ import {
   rowToDot, mergeDots, readCache, writeCache, readOptimistic, addOptimistic,
   type Dot, type MessageRow,
 } from '../../lib/voices';
-
-const FN_URL = `${import.meta.env.PUBLIC_SUPABASE_URL}/functions/v1/submit-message`;
+import { validateSubmission } from '../../lib/validation';
+import { containsProfanity } from '../../lib/profanity';
 
 export async function mountHero(): Promise<void> {
   const container = document.querySelector<HTMLElement>('[data-globe]');
@@ -42,15 +42,23 @@ export async function mountHero(): Promise<void> {
     .subscribe();
 
   cta?.addEventListener('click', () => openForm(container, async (raw) => {
-    const res = await submitMessage(raw, isValidCountryCode, fetch, FN_URL);
-    if (res.ok) {
-      const localDot = rowToDot(
-        { id: `local-${Date.now()}`, message: raw.message, display_name: raw.displayName ?? null, country_code: raw.countryCode },
-        true,
-      );
-      if (localDot) { addOptimistic(localDot); optimistic.push(localDot); render(localDot.id); }
-    }
-    return res;
+    const input = buildSubmission(raw);
+    const v = validateSubmission(input, isValidCountryCode);
+    if (!v.ok) return { ok: false, errors: v.errors };
+    if (containsProfanity(input.message)) return { ok: false, errors: ['profanity'] };
+    const { error } = await supabase.from('messages').insert({
+      message: input.message,
+      display_name: input.displayName,
+      country_code: input.countryCode,
+      status: 'pending',
+    });
+    if (error) return { ok: false, errors: ['submit_failed'] };
+    const localDot = rowToDot(
+      { id: `local-${Date.now()}`, message: input.message, display_name: input.displayName ?? null, country_code: input.countryCode },
+      true,
+    );
+    if (localDot) { addOptimistic(localDot); optimistic.push(localDot); render(localDot.id); }
+    return { ok: true, errors: [] };
   }));
 }
 
