@@ -47,7 +47,7 @@ export function createGlobe(container: HTMLElement, onDotClick: (d: Dot) => void
     .map((p) => new THREE.Vector3(p.x, p.y, limbZ));
   const limb = new THREE.LineLoop(
     new THREE.BufferGeometry().setFromPoints(limbPts),
-    new THREE.LineBasicMaterial({ color: 0x5a6b62, transparent: true, opacity: 0.7 }),
+    new THREE.LineBasicMaterial({ color: 0x2b3a33, transparent: true, opacity: 0.92 }),
   );
   scene.add(limb);
 

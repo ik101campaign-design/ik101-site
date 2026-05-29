@@ -11,7 +11,7 @@ body { margin: 0; background: var(--bg); color: var(--ink); font-family: Georgia
 .hero__counter { margin-top: 1.25rem; font-size: 0.8rem; letter-spacing: 0.12em; color: var(--muted); }
 .hero__counter b { color: var(--accent); }
 /* Reserve globe space to guarantee CLS = 0 even before the island loads. */
-.hero__globe { aspect-ratio: 1 / 1; width: 100%; max-width: 640px; justify-self: center; }
+.hero__globe { aspect-ratio: 1 / 1; width: 100%; max-width: min(520px, 64vh); justify-self: center; }
 @media (max-width: 768px) {
   .hero { grid-template-columns: 1fr; min-height: auto; }
   .hero__globe { order: 2; margin-top: 2rem; }
