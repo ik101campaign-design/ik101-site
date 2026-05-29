@@ -35,7 +35,7 @@ export function createGlobe(container: HTMLElement, onDotClick: (d: Dot) => void
   const scene = new THREE.Scene();
   scene.add(globe, new THREE.AmbientLight(0xffffff, 1));
   const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 1000);
-  camera.position.z = 200;
+  camera.position.z = 300; // pulled back so the whole globe + rim fit in frame (no pole clipping)
 
   // Crisp rim tracing the sphere's silhouette (tangent circle), fixed facing the
   // camera so it stays a clean outline as the globe spins.
