@@ -24,7 +24,8 @@ export function createGlobe(container: HTMLElement, onDotClick: (d: Dot) => void
   const land = feature(worldTopo as any, (worldTopo as any).objects.countries) as any;
 
   const globe = new ThreeGlobe()
-    .showGlobe(false)
+    .showGlobe(true)
+    .globeMaterial(new THREE.MeshBasicMaterial({ color: 0xe0f1e4, transparent: true, opacity: 0.95 }))
     .showAtmosphere(false)
     .polygonsData(land.features)
     .polygonCapColor(() => 'rgba(0,0,0,0)')
