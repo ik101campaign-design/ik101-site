@@ -37,6 +37,20 @@ export function createGlobe(container: HTMLElement, onDotClick: (d: Dot) => void
   const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 1000);
   camera.position.z = 200;
 
+  // Crisp rim tracing the sphere's silhouette (tangent circle), fixed facing the
+  // camera so it stays a clean outline as the globe spins.
+  const GLOBE_RADIUS = 100;
+  const limbRadius = GLOBE_RADIUS * Math.sqrt(1 - (GLOBE_RADIUS / camera.position.z) ** 2);
+  const limbZ = (GLOBE_RADIUS * GLOBE_RADIUS) / camera.position.z;
+  const limbPts = new THREE.EllipseCurve(0, 0, limbRadius, limbRadius, 0, Math.PI * 2, false, 0)
+    .getPoints(160)
+    .map((p) => new THREE.Vector3(p.x, p.y, limbZ));
+  const limb = new THREE.LineLoop(
+    new THREE.BufferGeometry().setFromPoints(limbPts),
+    new THREE.LineBasicMaterial({ color: 0x5a6b62, transparent: true, opacity: 0.7 }),
+  );
+  scene.add(limb);
+
   let visible = true;
   const io = new IntersectionObserver(([e]) => { visible = e.isIntersecting; });
   io.observe(container);
