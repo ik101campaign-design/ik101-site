@@ -1,5 +1,7 @@
 import ThreeGlobe from 'three-globe';
 import * as THREE from 'three';
+import { feature } from 'topojson-client';
+import worldTopo from 'world-atlas/countries-110m.json';
 import type { Dot } from '../../lib/voices';
 import { dotColor, shouldAnimate } from './globe-style';
 
@@ -19,12 +21,16 @@ export function createGlobe(container: HTMLElement, onDotClick: (d: Dot) => void
   renderer.setClearColor(0x000000, 0);
   container.appendChild(renderer.domElement);
 
+  const land = feature(worldTopo as any, (worldTopo as any).objects.countries) as any;
+
   const globe = new ThreeGlobe()
     .showGlobe(false)
     .showAtmosphere(false)
+    .hexPolygonsData(land.features)
     .hexPolygonResolution(3)
     .hexPolygonMargin(0.7)
-    .hexPolygonColor(() => 'rgba(90,107,98,0.35)'); // faint wireframe land
+    .hexPolygonUseDots(true)
+    .hexPolygonColor(() => 'rgba(90,107,98,0.55)'); // land hex dots
 
   const scene = new THREE.Scene();
   scene.add(globe, new THREE.AmbientLight(0xffffff, 1));
