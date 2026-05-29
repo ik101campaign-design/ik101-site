@@ -1,0 +1,15 @@
+---
+interface Props { title: string; description?: string; }
+const { title, description = 'IK101 — From his legacy to your action.' } = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <link rel="preconnect" href={import.meta.env.PUBLIC_SUPABASE_URL} crossorigin />
+    <title>{title}</title>
+  </head>
+  <body><slot /></body>
+</html>
