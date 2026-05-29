@@ -1,0 +1,18 @@
+---
+import { getEntry } from 'astro:content';
+const hero = await getEntry('hero', 'main');
+const c = hero.data;
+---
+<section class="hero">
+  <div class="hero__copy">
+    <p class="hero__eyebrow">{c.eyebrow}</p>
+    <h1 class="hero__title">{c.headline} <span class="accent">{c.headlineAccent}</span></h1>
+    <p class="hero__subhead">{c.subhead}</p>
+    <button class="hero__cta" data-globe-cta type="button">{c.ctaLabel}</button>
+    <p class="hero__counter">VOICES: <b data-voices-count>—</b></p>
+  </div>
+  <div class="hero__globe" data-globe data-pending-message={c.pendingMessage}></div>
+</section>
+<script>
+  import('../components/hero/island.ts').then((m) => m.mountHero());
+</script>

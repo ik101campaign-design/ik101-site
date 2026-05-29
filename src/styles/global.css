@@ -1,0 +1,19 @@
+:root { --bg: #f7f8f7; --ink: #0a0e0c; --muted: #5a6b62; --accent: #00bf63; }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: Georgia, 'Times New Roman', serif; }
+.hero { min-height: 100svh; display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 2rem; padding: clamp(1.5rem, 4vw, 4rem); }
+.hero__copy { max-width: 48ch; }
+.hero__eyebrow { text-transform: uppercase; letter-spacing: 0.18em; font-size: 0.8rem; color: var(--accent); margin: 0 0 1rem; }
+.hero__title { font-size: clamp(2.5rem, 6vw, 5rem); line-height: 1.05; margin: 0 0 1rem; font-weight: 600; }
+.hero__title .accent { color: var(--accent); }
+.hero__subhead { font-size: 1.125rem; line-height: 1.6; color: var(--muted); }
+.hero__cta { display: inline-block; margin-top: 1.5rem; background: var(--accent); color: #06140d; font-weight: 700; padding: 0.9rem 1.6rem; border: 0; border-radius: 4px; cursor: pointer; }
+.hero__counter { margin-top: 1.25rem; font-size: 0.8rem; letter-spacing: 0.12em; color: var(--muted); }
+.hero__counter b { color: var(--accent); }
+/* Reserve globe space to guarantee CLS = 0 even before the island loads. */
+.hero__globe { aspect-ratio: 1 / 1; width: 100%; max-width: 640px; justify-self: center; }
+@media (max-width: 768px) {
+  .hero { grid-template-columns: 1fr; min-height: auto; }
+  .hero__globe { order: 2; margin-top: 2rem; }
+}
+@media (prefers-reduced-motion: reduce) { .hero__globe canvas { animation: none !important; } }
