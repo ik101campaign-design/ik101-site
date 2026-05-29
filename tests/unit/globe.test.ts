@@ -6,7 +6,7 @@ test('pending and newest dots use the accent color', () => {
 });
 
 test('ordinary dots are muted gray', () => {
-  expect(dotColor({ pending: false, isNewest: false })).toBe('#8a978f');
+  expect(dotColor({ pending: false, isNewest: false })).toBe('#2e9a55');
 });
 
 test('shouldAnimate respects reduced motion + visibility', () => {

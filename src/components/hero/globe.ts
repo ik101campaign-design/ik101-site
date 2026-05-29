@@ -29,7 +29,7 @@ export function createGlobe(container: HTMLElement, onDotClick: (d: Dot) => void
     .polygonsData(land.features)
     .polygonCapColor(() => 'rgba(0,0,0,0)')
     .polygonSideColor(() => 'rgba(0,0,0,0)')
-    .polygonStrokeColor(() => 'rgba(90,107,98,0.55)')
+    .polygonStrokeColor(() => 'rgba(42,58,50,0.72)')
     .polygonAltitude(0.006); // faint coastline/border wireframe (Nutopia look)
 
   const scene = new THREE.Scene();
@@ -47,7 +47,7 @@ export function createGlobe(container: HTMLElement, onDotClick: (d: Dot) => void
     .map((p) => new THREE.Vector3(p.x, p.y, limbZ));
   const limb = new THREE.LineLoop(
     new THREE.BufferGeometry().setFromPoints(limbPts),
-    new THREE.LineBasicMaterial({ color: 0x2b3a33, transparent: true, opacity: 0.85 }),
+    new THREE.LineBasicMaterial({ color: 0x223028, transparent: true, opacity: 0.95 }),
   );
   scene.add(limb);
 
@@ -130,7 +130,7 @@ export function createGlobe(container: HTMLElement, onDotClick: (d: Dot) => void
       globe.pointsData(dots)
         .pointLat('lat').pointLng('lng')
         .pointAltitude(0.02)
-        .pointRadius(1.2)
+        .pointRadius(2.2)
         .pointColor((d: any) => dotColor({ pending: d.pending, isNewest: d.id === newestId }));
     },
     destroy() {
