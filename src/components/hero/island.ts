@@ -5,7 +5,7 @@ import { COUNTRY_CENTROIDS } from '../../lib/countries-data';
 import { supabase } from '../../lib/supabase';
 import {
   rowToDot, mergeDots, readCache, writeCache, readOptimistic, addOptimistic,
-  type Dot, type MessageRow,
+  OPTIMISTIC_KEY, type Dot, type MessageRow,
 } from '../../lib/voices';
 import { validateSubmission } from '../../lib/validation';
 import { containsProfanity } from '../../lib/profanity';
@@ -30,6 +30,13 @@ export async function mountHero(): Promise<void> {
   const { data } = await supabase.from('messages').select('id,message,display_name,country_code').eq('status', 'approved');
   approved = (data ?? []).map((r) => rowToDot(r as MessageRow, false)).filter(Boolean) as Dot[];
   writeCache(approved);
+  const approvedKeys = new Set(approved.map((d) => d.message + '|' + d.country));
+  const kept = optimistic.filter((d) => !approvedKeys.has(d.message + '|' + d.country));
+  if (kept.length !== optimistic.length) {
+    optimistic.length = 0;
+    optimistic.push(...kept);
+    localStorage.setItem(OPTIMISTIC_KEY, JSON.stringify(optimistic));
+  }
   render();
 
   supabase.channel('messages')
@@ -37,7 +44,18 @@ export async function mountHero(): Promise<void> {
       (payload) => {
         const row = payload.new as MessageRow;
         const dot = rowToDot(row, false);
-        if (dot && !approved.some((d) => d.id === dot.id)) { approved.push(dot); writeCache(approved); render(dot.id); }
+        if (dot && !approved.some((d) => d.id === dot.id)) {
+          approved.push(dot);
+          writeCache(approved);
+          const rtKey = dot.message + '|' + dot.country;
+          const rtKept = optimistic.filter((d) => d.message + '|' + d.country !== rtKey);
+          if (rtKept.length !== optimistic.length) {
+            optimistic.length = 0;
+            optimistic.push(...rtKept);
+            localStorage.setItem(OPTIMISTIC_KEY, JSON.stringify(optimistic));
+          }
+          render(dot.id);
+        }
       })
     .subscribe();
 

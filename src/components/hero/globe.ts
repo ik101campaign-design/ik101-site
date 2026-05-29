@@ -116,8 +116,17 @@ export function createGlobe(container: HTMLElement, onDotClick: (d: Dot) => void
       globe.pointsData(dots)
         .pointLat('lat').pointLng('lng')
         .pointAltitude(0.02)
-        .pointRadius(1.2)
-        .pointColor((d: any) => dotColor({ pending: d.pending, isNewest: d.id === newestId }));
+        .pointsMerge(false);
+      // pointThreeObject is a valid three-globe accessor absent from the bundled .d.ts
+      (globe as any).pointThreeObject((d: any) => {
+        const color = dotColor({ pending: d.pending, isNewest: d.id === newestId });
+        const mesh = new THREE.Mesh(
+          new THREE.SphereGeometry(1.4, 12, 12),
+          new THREE.MeshBasicMaterial({ color }),
+        );
+        (mesh as any).__dot = d;
+        return mesh;
+      });
     },
     destroy() {
       cancelAnimationFrame(raf);
