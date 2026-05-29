@@ -43,9 +43,55 @@ export function createGlobe(container: HTMLElement, onDotClick: (d: Dot) => void
   const onVis = () => { /* read in loop */ };
   document.addEventListener('visibilitychange', onVis);
 
+  // Drag-to-spin state
+  let dragging = false;
+  let lastPointerX = 0;
+  let lastPointerY = 0;
+  let lastInteraction = 0;
+
+  const el = renderer.domElement;
+  el.style.cursor = 'grab';
+  el.style.touchAction = 'none';
+
+  const onPointerDown = (ev: PointerEvent) => {
+    dragging = true;
+    lastPointerX = ev.clientX;
+    lastPointerY = ev.clientY;
+    el.style.cursor = 'grabbing';
+    el.setPointerCapture(ev.pointerId);
+  };
+
+  const onPointerMove = (ev: PointerEvent) => {
+    if (!dragging) return;
+    const dx = ev.clientX - lastPointerX;
+    const dy = ev.clientY - lastPointerY;
+    lastPointerX = ev.clientX;
+    lastPointerY = ev.clientY;
+    globe.rotation.y += dx * 0.005;
+    globe.rotation.x = Math.max(-1, Math.min(1, globe.rotation.x + dy * 0.005));
+  };
+
+  const onPointerEnd = (ev: PointerEvent) => {
+    if (!dragging) return;
+    dragging = false;
+    lastInteraction = Date.now();
+    el.style.cursor = 'grab';
+    el.releasePointerCapture(ev.pointerId);
+  };
+
+  el.addEventListener('pointerdown', onPointerDown);
+  el.addEventListener('pointermove', onPointerMove);
+  el.addEventListener('pointerup', onPointerEnd);
+  el.addEventListener('pointerleave', onPointerEnd);
+  el.addEventListener('pointercancel', onPointerEnd);
+
   let raf = 0;
   const loop = () => {
-    if (shouldAnimate({ reducedMotion, visible: visible && !document.hidden })) {
+    const autoRotate =
+      shouldAnimate({ reducedMotion, visible: visible && !document.hidden }) &&
+      !dragging &&
+      Date.now() - lastInteraction > 3000;
+    if (autoRotate) {
       globe.rotation.y += 0.0015;
     }
     renderer.render(scene, camera);
@@ -69,14 +115,19 @@ export function createGlobe(container: HTMLElement, onDotClick: (d: Dot) => void
     setDots(dots: Dot[], newestId?: string) {
       globe.pointsData(dots)
         .pointLat('lat').pointLng('lng')
-        .pointAltitude(0.01)
-        .pointRadius(0.4)
+        .pointAltitude(0.02)
+        .pointRadius(1.2)
         .pointColor((d: any) => dotColor({ pending: d.pending, isNewest: d.id === newestId }));
     },
     destroy() {
       cancelAnimationFrame(raf);
       io.disconnect();
       document.removeEventListener('visibilitychange', onVis);
+      el.removeEventListener('pointerdown', onPointerDown);
+      el.removeEventListener('pointermove', onPointerMove);
+      el.removeEventListener('pointerup', onPointerEnd);
+      el.removeEventListener('pointerleave', onPointerEnd);
+      el.removeEventListener('pointercancel', onPointerEnd);
       renderer.dispose();
       container.replaceChildren();
     },
