@@ -16,10 +16,11 @@
     "@supabase/supabase-js": "^2.45.0",
     "astro": "^4.16.18",
     "three": "^0.160.0",
-    "three-globe": "^2.31.0"
+    "three-globe": "2.31.0"
   },
   "devDependencies": {
     "@playwright/test": "^1.47.0",
+    "@types/three": "^0.160.0",
     "jsdom": "^25.0.0",
     "typescript": "^5.4.0",
     "vitest": "^2.0.0"
