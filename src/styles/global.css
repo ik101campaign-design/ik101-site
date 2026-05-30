@@ -16,19 +16,34 @@ body {
   min-height: 100vh;
   font-family: var(--font-sans);
   color: var(--ink);
-  /* white "sky" melting into a band of golf-green grass at the base,
-     where the globe rises out of the green */
-  background: linear-gradient(180deg, #ffffff 0%, #ffffff 30%, #eaf5ec 55%, #97cca0 78%, #34a35a 100%);
+  background: #ffffff;
 }
 
-/* Nav */
+/* Nav — sticky; condenses into a frosted floating bar on scroll */
 .nav {
-  position: relative;
-  z-index: 3;
+  position: sticky;
+  top: 0;
+  z-index: 50;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 1.6rem clamp(1.5rem, 4vw, 3rem);
+  transition: top 0.35s var(--ease-out), padding 0.35s var(--ease-out),
+              background 0.35s var(--ease-out), box-shadow 0.35s var(--ease-out),
+              border-radius 0.35s var(--ease-out), width 0.35s var(--ease-out);
+}
+.nav.is-float {
+  top: 0.7rem;
+  width: min(1080px, calc(100% - 1.6rem));
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0.7rem 1.5rem;
+  border-radius: 100px;
+  background: rgba(255, 255, 255, 0.6);
+  -webkit-backdrop-filter: blur(16px) saturate(1.5);
+  backdrop-filter: blur(16px) saturate(1.5);
+  border: 1px solid rgba(20, 40, 28, 0.08);
+  box-shadow: 0 10px 34px rgba(20, 40, 28, 0.10);
 }
 .nav__logo { font-weight: 700; font-size: 1.1rem; letter-spacing: 0.05em; color: var(--ink); text-decoration: none; }
 .nav__links { display: flex; gap: 2.2rem; }
@@ -119,6 +134,30 @@ body {
   margin: 2.75rem auto 0;
   scroll-margin-top: 5rem;
 }
+
+/* Voices — round HTML dots overlaid on the globe (clickable) */
+.globe-dot {
+  position: absolute;
+  width: 12px; height: 12px;
+  margin: 0; padding: 0;
+  border: none; border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 4px rgba(0, 191, 99, 0.16), 0 1px 5px rgba(0, 0, 0, 0.22);
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  pointer-events: auto;
+  transition: transform 0.16s var(--ease-out);
+}
+.globe-dot:hover { transform: translate(-50%, -50%) scale(1.45); z-index: 2; }
+.globe-dot.is-newest {
+  background: #16e07a;
+  animation: dotPulse 1.8s ease-in-out infinite;
+}
+@keyframes dotPulse {
+  0%, 100% { box-shadow: 0 0 0 4px rgba(0, 191, 99, 0.30), 0 1px 5px rgba(0, 0, 0, 0.22); }
+  50%      { box-shadow: 0 0 0 11px rgba(0, 191, 99, 0.04), 0 1px 5px rgba(0, 0, 0, 0.22); }
+}
+@media (prefers-reduced-motion: reduce) { .globe-dot.is-newest { animation: none; } }
 
 /* Focus + gentle entrance */
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }

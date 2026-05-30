@@ -30,4 +30,10 @@ const c = hero.data;
 
 <script>
   import('../components/hero/island.ts').then((m) => m.mountHero());
+  const nav = document.querySelector('.nav');
+  if (nav) {
+    const onScroll = () => nav.classList.toggle('is-float', window.scrollY > 24);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  }
 </script>
