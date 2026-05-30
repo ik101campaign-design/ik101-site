@@ -19,31 +19,50 @@ body {
   background: #ffffff;
 }
 
-/* Nav — sticky; condenses into a frosted floating bar on scroll */
+/* Nav — sticky; smoothly morphs into a frosted floating bar on scroll.
+   Every animated property has an explicit value in BOTH states so it can
+   interpolate (no auto/none = no snapping). */
 .nav {
   position: sticky;
   top: 0;
   z-index: 50;
+  width: 100%;
+  max-width: 1500px;          /* full-width at top; shrinks to the pill on scroll */
+  margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 1.6rem clamp(1.5rem, 4vw, 3rem);
-  transition: top 0.35s var(--ease-out), padding 0.35s var(--ease-out),
-              background 0.35s var(--ease-out), box-shadow 0.35s var(--ease-out),
-              border-radius 0.35s var(--ease-out), width 0.35s var(--ease-out);
+  border: 1px solid transparent;
+  border-radius: 0;
+  background: rgba(255, 255, 255, 0);
+  box-shadow: 0 12px 34px rgba(20, 40, 28, 0);
+  -webkit-backdrop-filter: blur(0px) saturate(1);
+  backdrop-filter: blur(0px) saturate(1);
+  transition:
+    max-width 0.5s var(--ease-out),
+    top 0.5s var(--ease-out),
+    padding 0.5s var(--ease-out),
+    border-radius 0.5s var(--ease-out),
+    background 0.5s var(--ease-out),
+    border-color 0.5s var(--ease-out),
+    box-shadow 0.5s var(--ease-out),
+    -webkit-backdrop-filter 0.5s var(--ease-out),
+    backdrop-filter 0.5s var(--ease-out);
 }
 .nav.is-float {
+  max-width: 1060px;
   top: 0.7rem;
-  width: min(1080px, calc(100% - 1.6rem));
-  margin-left: auto;
-  margin-right: auto;
   padding: 0.7rem 1.5rem;
   border-radius: 100px;
-  background: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.62);
+  border-color: rgba(20, 40, 28, 0.08);
+  box-shadow: 0 12px 34px rgba(20, 40, 28, 0.12);
   -webkit-backdrop-filter: blur(16px) saturate(1.5);
   backdrop-filter: blur(16px) saturate(1.5);
-  border: 1px solid rgba(20, 40, 28, 0.08);
-  box-shadow: 0 10px 34px rgba(20, 40, 28, 0.10);
+}
+@media (prefers-reduced-motion: reduce) {
+  .nav { transition: none; }
 }
 .nav__logo { font-weight: 700; font-size: 1.1rem; letter-spacing: 0.05em; color: var(--ink); text-decoration: none; }
 .nav__links { display: flex; gap: 2.2rem; }
