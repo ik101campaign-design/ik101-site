@@ -6,23 +6,23 @@ const c = hero.data;
 <header class="nav">
   <a class="nav__logo" href="/">IK101</a>
   <nav class="nav__links">
-    <a href="#">Spirit</a>
-    <a href="#">Resources</a>
-    <a href="#">Connect</a>
+    <button class="nav__link" type="button">Spirit</button>
+    <button class="nav__link" type="button">Resources</button>
+    <button class="nav__link" type="button">Connect</button>
   </nav>
   <button class="nav__cta" data-globe-cta type="button">Add your voice</button>
 </header>
 
 <section class="hero">
-  <a class="hero__pill" href="#globe">
+  <button class="hero__pill" type="button" data-scroll-globe>
     <span>{c.eyebrow}</span>
     <span class="hero__pill-arrow">&#8594;</span>
-  </a>
+  </button>
   <h1 class="hero__title">{c.headline} <span class="accent">{c.headlineAccent}</span></h1>
   <p class="hero__subhead">{c.subhead}</p>
   <div class="hero__actions">
     <button class="hero__cta" data-globe-cta type="button">{c.ctaLabel}</button>
-    <a class="hero__cta-circle" href="#globe" aria-label="Scroll to the globe">&#8595;</a>
+    <button class="hero__cta-circle" type="button" data-scroll-globe aria-label="Scroll to the globe">&#8595;</button>
   </div>
   <p class="hero__counter">voices: <b data-voices-count>&#8212;</b></p>
   <div class="hero__globe" id="globe" data-globe data-pending-message={c.pendingMessage}></div>
@@ -36,4 +36,9 @@ const c = hero.data;
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
   }
+  document.querySelectorAll('[data-scroll-globe]').forEach((b) =>
+    b.addEventListener('click', () =>
+      document.getElementById('globe')?.scrollIntoView({ behavior: 'smooth', block: 'center' }),
+    ),
+  );
 </script>

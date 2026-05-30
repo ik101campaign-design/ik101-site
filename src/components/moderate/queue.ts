@@ -41,7 +41,7 @@ export async function mountModerate(): Promise<void> {
     }
     for (const row of data as MessageRow[]) {
       const card = document.createElement('div');
-      card.style.cssText = 'border:1px solid #d8e0db;border-radius:8px;padding:12px;margin:10px 0;display:flex;justify-content:space-between;align-items:center;gap:12px;';
+      card.style.cssText = 'background:#ffffff;border:1px solid rgba(20,40,28,0.08);border-radius:14px;padding:14px 16px;margin:10px 0;display:flex;justify-content:space-between;align-items:center;gap:12px;box-shadow:0 2px 10px rgba(20,40,28,0.05);';
       const text = document.createElement('span');
       text.textContent = summarize(row);
       card.appendChild(text);
@@ -50,7 +50,9 @@ export async function mountModerate(): Promise<void> {
         const btn = document.createElement('button');
         btn.textContent = action;
         btn.dataset.action = action;
-        btn.style.cssText = `margin-left:8px;padding:6px 12px;border:0;border-radius:4px;cursor:pointer;font-weight:700;color:${action === 'approve' ? '#06140d' : '#fff'};background:${action === 'approve' ? '#00bf63' : '#c0392b'};`;
+        btn.style.cssText = action === 'approve'
+          ? 'margin-left:8px;background:#00bf63;color:#16201b;border:0;border-radius:100px;padding:7px 16px;font-weight:600;cursor:pointer;'
+          : 'margin-left:8px;background:transparent;border:1px solid rgba(20,40,28,0.18);color:#5a6b62;border-radius:100px;padding:7px 16px;cursor:pointer;';
         btn.addEventListener('click', async () => {
           await supabase.from('messages').update({ status: nextStatus(action) }).eq('id', row.id);
           card.remove();

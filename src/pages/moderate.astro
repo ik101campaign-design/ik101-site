@@ -2,15 +2,21 @@
 import Layout from '../layouts/Layout.astro';
 ---
 <Layout title="IK101 — Moderate">
-  <main style="max-width:640px;margin:3rem auto;padding:1rem;">
-    <h1>Moderate voices</h1>
+  <main class="mod-main">
+    <h1 class="mod-heading">Moderate voices</h1>
     <section data-auth-gate>
-      <form data-login-form>
-        <input data-login-email type="email" placeholder="you@email.com" required aria-label="Email" />
-        <input data-login-password type="password" placeholder="Password (or leave blank for a magic link)" aria-label="Password" />
-        <button data-login-password-btn type="submit">Sign in</button>
-        <button data-login-magic-btn type="button">Email me a magic link</button>
-        <p data-login-error role="alert"></p>
+      <form data-login-form class="mod-card">
+        <div class="mod-field">
+          <label for="mod-email">Email</label>
+          <input id="mod-email" data-login-email type="email" placeholder="you@email.com" required aria-label="Email" />
+        </div>
+        <div class="mod-field">
+          <label for="mod-password">Password</label>
+          <input id="mod-password" data-login-password type="password" placeholder="Password (or leave blank for a magic link)" aria-label="Password" />
+        </div>
+        <button data-login-password-btn type="submit" class="mod-btn-primary">Sign in</button>
+        <button data-login-magic-btn type="button" class="mod-btn-ghost">Email me a magic link</button>
+        <p data-login-error role="alert" class="mod-error"></p>
       </form>
     </section>
     <section data-queue hidden></section>
@@ -19,3 +25,99 @@ import Layout from '../layouts/Layout.astro';
     import('../components/moderate/queue.ts').then((m) => m.mountModerate());
   </script>
 </Layout>
+
+<style>
+  .mod-main {
+    max-width: 640px;
+    margin: 4rem auto;
+    padding: 1rem;
+  }
+  .mod-heading {
+    font-family: var(--font-sans);
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: -0.02em;
+    margin: 0 0 2rem;
+  }
+  .mod-card {
+    max-width: 420px;
+    margin: 0 auto;
+    background: #ffffff;
+    border: 1px solid rgba(20, 40, 28, 0.08);
+    border-radius: 20px;
+    padding: 28px 26px 24px;
+    box-shadow: 0 4px 24px rgba(20, 40, 28, 0.07);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    font-family: var(--font-sans);
+  }
+  .mod-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .mod-field label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--ink);
+    letter-spacing: 0.02em;
+  }
+  .mod-field input {
+    background: #fbfdfb;
+    border: 1.5px solid rgba(20, 40, 28, 0.12);
+    border-radius: 10px;
+    padding: 11px 13px;
+    font-size: 0.95rem;
+    color: var(--ink);
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.15s, box-shadow 0.15s;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .mod-field input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(0, 191, 99, 0.12);
+  }
+  .mod-btn-primary {
+    background: var(--accent);
+    color: var(--ink);
+    border: none;
+    border-radius: 100px;
+    padding: 11px 22px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: filter 0.15s, transform 0.15s;
+    align-self: flex-start;
+  }
+  .mod-btn-primary:hover {
+    filter: brightness(1.05);
+    transform: translateY(-1px);
+  }
+  .mod-btn-ghost {
+    background: transparent;
+    border: none;
+    padding: 0;
+    font-size: 0.875rem;
+    font-family: inherit;
+    color: var(--muted);
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    align-self: flex-start;
+    transition: color 0.15s;
+  }
+  .mod-btn-ghost:hover {
+    color: var(--ink);
+  }
+  .mod-error {
+    font-size: 0.85rem;
+    color: #b03030;
+    margin: 0;
+    min-height: 1.2em;
+  }
+</style>

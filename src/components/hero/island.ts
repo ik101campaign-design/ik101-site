@@ -86,119 +86,54 @@ export async function mountHero(): Promise<void> {
 
 const DIALOG_STYLE = `
 [data-globe-form] {
-  border: none;
-  border-radius: 12px;
-  padding: 0;
-  background: transparent;
-  max-width: 480px;
-  width: 100%;
+  border: none; border-radius: 20px; padding: 0; background: transparent;
+  max-width: 460px; width: 100%;
 }
 [data-globe-form]::backdrop {
-  background: rgba(10,14,12,0.55);
-  backdrop-filter: blur(3px);
+  background: rgba(20, 30, 24, 0.4);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
 }
 .gf-inner {
-  background: #f7f8f7;
-  color: #0a0e0c;
-  border-radius: 12px;
-  padding: 28px 24px 24px;
-  font-family: system-ui, sans-serif;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
+  background: #ffffff;
+  color: var(--ink);
+  border: 1px solid rgba(20, 40, 28, 0.07);
+  border-radius: 20px;
+  padding: 28px 26px 24px;
+  font-family: var(--font-sans);
+  box-shadow: 0 30px 70px rgba(20, 40, 28, 0.16);
+  display: flex; flex-direction: column; gap: 16px;
 }
-.gf-title {
-  margin: 0 0 4px;
-  font-size: 1.15rem;
-  font-weight: 700;
-  color: #0a0e0c;
+.gf-title { margin: 0; font-size: 1.4rem; font-weight: 600; letter-spacing: -0.01em; color: var(--ink); }
+.gf-field { display: flex; flex-direction: column; gap: 6px; }
+.gf-field label { font-size: 0.8rem; font-weight: 600; color: var(--ink); letter-spacing: 0.02em; }
+.gf-field textarea, .gf-field input, .gf-field select {
+  background: #fbfdfb; border: 1.5px solid rgba(20, 40, 28, 0.12); border-radius: 10px;
+  padding: 11px 13px; font-size: 0.95rem; color: var(--ink); font-family: inherit;
+  outline: none; transition: border-color 0.15s, box-shadow 0.15s; width: 100%; box-sizing: border-box;
 }
-.gf-field {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
+.gf-field textarea:focus, .gf-field input:focus, .gf-field select:focus {
+  border-color: var(--accent); box-shadow: 0 0 0 3px rgba(0, 191, 99, 0.12);
 }
-.gf-field label {
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: #0a0e0c;
-  letter-spacing: 0.03em;
-}
-.gf-field textarea,
-.gf-field input,
-.gf-field select {
-  background: #fff;
-  border: 1.5px solid #c8cfc9;
-  border-radius: 6px;
-  padding: 8px 10px;
-  font-size: 0.9rem;
-  color: #0a0e0c;
-  font-family: inherit;
-  outline: none;
-  transition: border-color 0.15s;
-  width: 100%;
-  box-sizing: border-box;
-}
-.gf-field textarea:focus,
-.gf-field input:focus,
-.gf-field select:focus {
-  border-color: #00bf63;
-}
-.gf-field textarea {
-  resize: vertical;
-  min-height: 90px;
-}
-.gf-counter {
-  font-size: 0.75rem;
-  color: #5a6b62;
-  text-align: right;
-  margin-top: -2px;
-}
-.gf-actions {
-  display: flex;
-  gap: 10px;
-  justify-content: flex-end;
-}
+.gf-field textarea { resize: vertical; min-height: 96px; }
+.gf-counter { font-size: 0.75rem; color: var(--muted); text-align: right; margin-top: -2px; }
+.gf-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 4px; }
 [data-submit] {
-  background: #00bf63;
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  padding: 9px 22px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  cursor: pointer;
+  background: var(--accent); color: var(--ink); border: none; border-radius: 100px;
+  padding: 11px 26px; font-size: 0.9rem; font-weight: 600; font-family: inherit; cursor: pointer;
+  transition: filter 0.15s, transform 0.15s;
+}
+[data-submit]:hover { filter: brightness(1.05); transform: translateY(-1px); }
+[data-submit]:disabled { opacity: 0.6; cursor: default; transform: none; }
+.gf-close-btn {
+  background: transparent; border: 1px solid rgba(20, 40, 28, 0.14); border-radius: 100px;
+  padding: 11px 20px; font-size: 0.9rem; font-weight: 500; font-family: inherit; cursor: pointer; color: var(--ink);
   transition: background 0.15s;
 }
-[data-submit]:hover {
-  background: #009e52;
-}
-.gf-close-btn {
-  background: transparent;
-  border: 1.5px solid #c8cfc9;
-  border-radius: 6px;
-  padding: 9px 16px;
-  font-size: 0.9rem;
-  cursor: pointer;
-  color: #0a0e0c;
-}
-.gf-close-btn:hover {
-  background: #e8eae8;
-}
-.gf-status {
-  border-radius: 6px;
-  padding: 10px 12px;
-  font-size: 0.875rem;
-  line-height: 1.4;
-}
-.gf-status[role="status"] {
-  background: #e6f9ef;
-  color: #00774a;
-}
-.gf-status[role="alert"] {
-  background: #fdecea;
-  color: #b03030;
-}
+.gf-close-btn:hover { background: rgba(20, 40, 28, 0.05); }
+.gf-status { border-radius: 10px; padding: 11px 13px; font-size: 0.875rem; line-height: 1.45; }
+.gf-status[role="status"] { background: rgba(0, 191, 99, 0.1); color: #0a7d42; }
+.gf-status[role="alert"] { background: #fdecea; color: #b03030; }
 `;
 
 function injectStyle(css: string, id: string): void {
@@ -374,51 +309,30 @@ function openForm(root: HTMLElement, onSubmit: OnSubmit): void {
 const POPOVER_STYLE = `
 [data-globe-popover] {
   position: fixed;
-  bottom: 24px;
+  bottom: 28px;
   left: 50%;
   transform: translateX(-50%);
-  background: #f7f8f7;
-  color: #0a0e0c;
-  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.62);
+  -webkit-backdrop-filter: blur(16px) saturate(1.5);
+  backdrop-filter: blur(16px) saturate(1.5);
+  border: 1px solid rgba(20, 40, 28, 0.08);
+  color: var(--ink);
+  border-radius: 16px;
   padding: 16px 18px;
-  font-family: system-ui, sans-serif;
+  font-family: var(--font-sans);
   font-size: 0.875rem;
-  max-width: 340px;
+  max-width: 360px;
   width: calc(100% - 48px);
-  box-shadow: 0 4px 24px rgba(10,14,12,0.18);
+  box-shadow: 0 12px 34px rgba(20, 40, 28, 0.12);
   z-index: 9000;
   display: flex;
   flex-direction: column;
   gap: 6px;
 }
-.gp-message {
-  font-size: 0.95rem;
-  line-height: 1.45;
-  color: #0a0e0c;
-  margin: 0;
-}
-.gp-meta {
-  font-size: 0.78rem;
-  color: #5a6b62;
-  display: flex;
-  gap: 8px;
-  align-items: center;
-}
-.gp-close {
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  margin-left: auto;
-  font-size: 1rem;
-  color: #5a6b62;
-  line-height: 1;
-  padding: 2px 4px;
-  border-radius: 4px;
-}
-.gp-close:hover {
-  background: #e8eae8;
-  color: #0a0e0c;
-}
+.gp-message { font-size: 0.98rem; line-height: 1.5; color: var(--ink); margin: 0; font-style: italic; }
+.gp-meta { font-size: 0.78rem; color: var(--muted); display: flex; gap: 8px; align-items: center; letter-spacing: 0.02em; }
+.gp-close { background: transparent; border: none; cursor: pointer; margin-left: auto; font-size: 0.95rem; color: var(--muted); line-height: 1; padding: 3px 6px; border-radius: 50%; transition: background 0.15s, color 0.15s; }
+.gp-close:hover { background: rgba(20, 40, 28, 0.06); color: var(--ink); }
 `;
 
 function showPopover(_root: HTMLElement, d: Dot): void {

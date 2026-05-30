@@ -66,8 +66,13 @@ body {
 }
 .nav__logo { font-weight: 700; font-size: 1.1rem; letter-spacing: 0.05em; color: var(--ink); text-decoration: none; }
 .nav__links { display: flex; gap: 2.2rem; }
-.nav__links a { font-size: 0.95rem; color: var(--muted); text-decoration: none; transition: color 0.2s var(--ease-out); }
-.nav__links a:hover { color: var(--ink); }
+.nav__link {
+  background: none; border: 0; padding: 0; margin: 0;
+  font-family: inherit; font-size: 0.95rem;
+  color: var(--muted); cursor: pointer;
+  transition: color 0.2s var(--ease-out);
+}
+.nav__link:hover { color: var(--ink); }
 .nav__cta {
   font-family: inherit; font-size: 0.9rem; font-weight: 600;
   color: var(--ink); background: var(--accent);
@@ -138,6 +143,8 @@ body {
   transition: border-color 0.2s var(--ease-out);
 }
 .hero__cta-circle:hover { border-color: var(--accent); }
+/* pill + circle are <button>s now (no # links) — keep them on the site font */
+.hero__pill, .hero__cta-circle { font-family: inherit; cursor: pointer; }
 
 .hero__counter {
   margin: 2.1rem 0 0;
