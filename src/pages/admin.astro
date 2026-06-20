@@ -1,0 +1,37 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout title="IK101 — Admin">
+  <main class="admin">
+    <h1>IK101 Admin</h1>
+    <button data-admin-login class="admin__btn admin__btn--primary" type="button">Sign in with GitHub</button>
+    <div data-admin-doors hidden class="admin__doors">
+      <a class="admin__door" href="/cms/"><b>Edit content</b><span>Update the site's words &amp; images</span></a>
+      <a class="admin__door" href="/moderate"><b>Moderate voices</b><span>Approve or reject submitted messages</span></a>
+    </div>
+    <p data-admin-status class="admin__status"></p>
+  </main>
+  <style>
+    .admin { max-width: 560px; margin: 4rem auto; padding: 0 1.5rem; font-family: 'Hanken Grotesk', system-ui, sans-serif; color: #16201b; }
+    .admin h1 { font-size: 2rem; font-weight: 600; }
+    .admin__btn--primary { background: #00bf63; color: #16201b; border: 0; border-radius: 100px; padding: 0.8rem 1.6rem; font: inherit; font-weight: 600; cursor: pointer; }
+    .admin__doors { display: grid; gap: 1rem; margin-top: 2rem; }
+    .admin__door { display: block; padding: 1.2rem 1.4rem; border: 1px solid rgba(20,40,28,0.12); border-radius: 16px; text-decoration: none; color: inherit; transition: border-color .2s, transform .2s; }
+    .admin__door:hover { border-color: #00bf63; transform: translateY(-1px); }
+    .admin__door b { display: block; font-size: 1.1rem; }
+    .admin__door span { color: #5a6b62; font-size: 0.9rem; }
+    .admin__status { color: #b03030; margin-top: 1rem; }
+  </style>
+  <script>
+    import { login, getToken } from '../lib/admin-auth';
+    const btn = document.querySelector<HTMLButtonElement>('[data-admin-login]');
+    const doors = document.querySelector<HTMLElement>('[data-admin-doors]');
+    const status = document.querySelector<HTMLElement>('[data-admin-status]');
+    const reveal = () => { if (btn) btn.hidden = true; if (doors) doors.hidden = false; };
+    if (getToken()) reveal();
+    btn?.addEventListener('click', async () => {
+      try { await login(); reveal(); }
+      catch { if (status) status.textContent = 'Sign-in failed or timed out. Try again.'; }
+    });
+  </script>
+</Layout>
