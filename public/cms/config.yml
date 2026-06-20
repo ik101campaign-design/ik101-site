@@ -2,7 +2,7 @@ backend:
   name: github
   repo: ik101campaign-design/ik101-site
   branch: main
-  base_url: https://REPLACE_WITH_SITE_DOMAIN
+  base_url: https://ik101.org
 media_folder: public/uploads
 public_folder: /uploads
 collections:
