@@ -1,4 +1,5 @@
 {
   "extends": "astro/tsconfigs/strict",
-  "compilerOptions": { "types": ["vitest/globals"] }
+  "compilerOptions": { "types": ["vitest/globals"] },
+  "exclude": ["functions"]
 }

@@ -1,0 +1,21 @@
+backend:
+  name: github
+  repo: ik101campaign-design/ik101-site
+  branch: main
+  base_url: https://ik101.org
+media_folder: public/uploads
+public_folder: /uploads
+collections:
+  - name: hero
+    label: Hero
+    files:
+      - name: main
+        label: Hero section
+        file: src/content/hero/main.json
+        fields:
+          - { name: eyebrow, label: Eyebrow, widget: string }
+          - { name: headline, label: "Headline (line 1)", widget: string }
+          - { name: headlineAccent, label: "Headline (line 2)", widget: string }
+          - { name: subhead, label: Subheadline, widget: text }
+          - { name: ctaLabel, label: "Button label", widget: string }
+          - { name: pendingMessage, label: "After-submit message", widget: text }

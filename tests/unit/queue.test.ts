@@ -1,7 +1,3 @@
-import { vi } from 'vitest';
-
-vi.mock('../../src/lib/supabase', () => ({ supabase: {} }));
-
 import { nextStatus, summarize } from '../../src/components/moderate/queue';
 
 test('approve/reject map to status values', () => {
