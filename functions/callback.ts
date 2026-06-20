@@ -17,8 +17,26 @@ export const onRequestGet: PagesFunction<Env> = async (ctx) => {
   const payload = data.access_token
     ? `authorization:github:success:${JSON.stringify({ token: data.access_token, provider: 'github' })}`
     : `authorization:github:error:${JSON.stringify({ message: 'No token returned' })}`;
+  // Decap/Sveltia OAuth handshake: the popup announces `authorizing:github`,
+  // waits for the opener to echo it back, THEN posts the token. (Sveltia ignores
+  // an unsolicited success message, so the immediate-post shortcut breaks the CMS.)
   const html = `<!doctype html><meta charset="utf-8"><script>
-    (function(){ try { window.opener && window.opener.postMessage(${JSON.stringify(payload)}, ${JSON.stringify(url.origin)}); } finally { window.close(); } })();
+    (function () {
+      var origin = ${JSON.stringify(url.origin)};
+      var payload = ${JSON.stringify(payload)};
+      function receive(e) {
+        if (e.origin !== origin || e.data !== 'authorizing:github') return;
+        window.removeEventListener('message', receive, false);
+        if (window.opener) window.opener.postMessage(payload, origin);
+        window.close();
+      }
+      window.addEventListener('message', receive, false);
+      if (window.opener) {
+        window.opener.postMessage('authorizing:github', origin);
+      } else {
+        document.body.textContent = 'No opener window — close this tab and retry from the admin.';
+      }
+    })();
   </script>You can close this window.`;
   return new Response(html, {
     headers: { 'Content-Type': 'text/html; charset=utf-8', 'Set-Cookie': 'ik101_oauth_state=; Max-Age=0; Path=/' },

@@ -13,11 +13,18 @@ export function parseAuthMessage(data: unknown): string | null {
 }
 
 // Opens the OAuth popup and resolves with the token (also stored).
+// Speaks the Decap/Sveltia opener side of the handshake: the popup first
+// announces `authorizing:github`, which we echo back; only then does it send
+// the token. (Same protocol Sveltia uses, so /callback works for both.)
 export function login(): Promise<string> {
   return new Promise((resolve, reject) => {
     const popup = window.open('/auth', 'ik101-auth', 'width=600,height=720');
     const onMsg = (e: MessageEvent) => {
       if (e.origin !== window.location.origin) return;
+      if (e.data === 'authorizing:github') {
+        popup?.postMessage('authorizing:github', window.location.origin);
+        return;
+      }
       const token = parseAuthMessage(e.data);
       if (!token) return;
       storeToken(token);
