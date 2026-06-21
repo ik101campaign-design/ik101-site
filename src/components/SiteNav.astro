@@ -30,7 +30,7 @@ const navItems: Array<{ label: string; href?: string; menu?: Array<{ label: stri
 ];
 ---
 <header class="nav">
-  <a class="nav__logo" href="/">IK101</a>
+  <a class="nav__logo" href="/"><img src="/ik101-logo.png" alt="IK101" width="90" height="30" /></a>
   <nav class="nav__links">
     {navItems.map((item) => item.menu ? (
       <div class="nav__drop">
@@ -57,19 +57,55 @@ const navItems: Array<{ label: string; href?: string; menu?: Array<{ label: stri
       <a class="nav__link" href={item.href} aria-current={current === item.href ? 'page' : undefined}>{item.label}</a>
     ))}
   </nav>
-  <a class="nav__cta" href="/#globe">Add your voice</a>
+  <div class="nav__right">
+    <a class="nav__cta" href="/#globe">Add your voice</a>
+    <button class="nav__burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-mobile">
+      <span class="nav__burger-lines" aria-hidden="true"></span>
+    </button>
+  </div>
 </header>
 
+<div class="nav__mobile" id="nav-mobile" hidden>
+  <nav class="nav__mobile-nav" aria-label="Mobile navigation">
+    {navItems.map((item) => item.menu ? (
+      <div class="nav__macc">
+        <button class="nav__macc-trigger" type="button" aria-expanded="false">
+          <span>{item.label}</span><span class="nav__macc-chev" aria-hidden="true"></span>
+        </button>
+        <div class="nav__macc-panel"><div class="nav__macc-inner">
+          {item.menu.map((r) => (
+            <a
+              class="nav__macc-link"
+              href={r.href}
+              aria-current={current === r.href ? 'page' : undefined}
+              target={r.ext ? '_blank' : undefined}
+              rel={r.ext ? 'noopener' : undefined}
+            >
+              <span>{r.label}</span>
+              {r.ext && <span class="nav__ext" aria-hidden="true">&#8599;</span>}
+            </a>
+          ))}
+        </div></div>
+      </div>
+    ) : (
+      <a class="nav__mlink" href={item.href} aria-current={current === item.href ? 'page' : undefined}>{item.label}</a>
+    ))}
+    <a class="nav__mcta" href="/#globe">Add your voice</a>
+  </nav>
+</div>
+
 <script>
+  // Scroll-frost
   const nav = document.querySelector('.nav');
   if (nav) {
     const onScroll = () => nav.classList.toggle('is-float', window.scrollY > 24);
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
   }
-  // Multiple dropdowns: hover + focus-within (CSS) cover desktop; this adds click/touch + a11y.
+
+  // Desktop dropdowns: hover + focus-within (CSS) cover desktop; this adds click/touch + a11y.
   const drops = Array.from(document.querySelectorAll<HTMLElement>('.nav__drop'));
-  const closeAll = () => drops.forEach((d) => {
+  const closeDrops = () => drops.forEach((d) => {
     d.classList.remove('is-open');
     d.querySelector('.nav__drop-trigger')?.setAttribute('aria-expanded', 'false');
   });
@@ -78,16 +114,43 @@ const navItems: Array<{ label: string; href?: string; menu?: Array<{ label: stri
     trigger?.addEventListener('click', (e) => {
       e.stopPropagation();
       const willOpen = !drop.classList.contains('is-open');
-      closeAll();
+      closeDrops();
       if (willOpen) { drop.classList.add('is-open'); trigger.setAttribute('aria-expanded', 'true'); }
     });
   });
-  document.addEventListener('click', closeAll);
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeAll(); });
+  document.addEventListener('click', closeDrops);
+
+  // Mobile menu
+  const burger = document.querySelector<HTMLButtonElement>('.nav__burger');
+  const mobile = document.getElementById('nav-mobile');
+  const setMenu = (open: boolean) => {
+    if (!mobile || !burger) return;
+    mobile.hidden = !open;
+    burger.classList.toggle('is-active', open);
+    burger.setAttribute('aria-expanded', String(open));
+    burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    document.body.style.overflow = open ? 'hidden' : '';
+  };
+  burger?.addEventListener('click', (e) => { e.stopPropagation(); setMenu(!!mobile?.hidden); });
+  mobile?.querySelectorAll<HTMLButtonElement>('.nav__macc-trigger').forEach((t) => {
+    t.addEventListener('click', () => {
+      const acc = t.closest('.nav__macc');
+      const open = acc ? acc.classList.toggle('is-open') : false;
+      t.setAttribute('aria-expanded', String(open));
+    });
+  });
+  mobile?.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setMenu(false)));
+  window.addEventListener('keydown', (e) => { if (e.key === 'Escape') { closeDrops(); setMenu(false); } });
+  window.addEventListener('resize', () => { if (window.innerWidth > 860 && mobile && !mobile.hidden) setMenu(false); });
 </script>
 
 <style>
   .nav__link, .nav__cta { text-decoration: none; }
+
+  .nav__logo { display: inline-flex; align-items: center; }
+  .nav__logo img { display: block; height: 30px; width: auto; }
+
+  .nav__right { display: flex; align-items: center; gap: 0.6rem; }
 
   .nav__drop { position: relative; }
   .nav__drop-trigger { display: inline-flex; align-items: center; gap: 0.35rem; }
@@ -128,5 +191,77 @@ const navItems: Array<{ label: string; href?: string; menu?: Array<{ label: stri
   .nav__menu-item[aria-current='page'] { color: var(--accent); font-weight: 600; }
   .nav__ext { font-size: 0.72rem; opacity: 0.5; }
 
-  @media (max-width: 860px) { .nav__drop { display: none; } }
+  /* Hamburger */
+  .nav__burger {
+    display: none; position: relative; width: 42px; height: 42px;
+    padding: 0; background: none; border: 0; cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .nav__burger-lines, .nav__burger-lines::before, .nav__burger-lines::after {
+    position: absolute; left: 10px; width: 22px; height: 2px;
+    background: var(--ink); border-radius: 2px;
+  }
+  .nav__burger-lines { top: 50%; margin-top: -1px; transition: background 0.16s var(--ease-out); }
+  .nav__burger-lines::before, .nav__burger-lines::after { content: ''; transition: transform 0.25s var(--ease-out); }
+  .nav__burger-lines::before { top: -7px; }
+  .nav__burger-lines::after { top: 7px; }
+  .nav__burger.is-active .nav__burger-lines { background: transparent; }
+  .nav__burger.is-active .nav__burger-lines::before { transform: translateY(7px) rotate(45deg); }
+  .nav__burger.is-active .nav__burger-lines::after { transform: translateY(-7px) rotate(-45deg); }
+
+  /* Mobile menu overlay */
+  .nav__mobile {
+    position: fixed; inset: 0; z-index: 40; background: #fff;
+    padding: 92px clamp(1.5rem, 6vw, 2.5rem) 2.5rem;
+    overflow-y: auto; -webkit-overflow-scrolling: touch;
+    animation: navMobileFade 0.25s var(--ease-out);
+  }
+  @keyframes navMobileFade { from { opacity: 0; } to { opacity: 1; } }
+  .nav__mobile-nav { display: flex; flex-direction: column; max-width: 540px; margin: 0 auto; }
+
+  .nav__mlink {
+    font-size: 1.3rem; font-weight: 600; color: var(--ink); text-decoration: none;
+    padding: 1.05rem 0; border-bottom: 1px solid var(--faint);
+  }
+  .nav__mlink[aria-current='page'] { color: var(--accent); }
+
+  .nav__macc { border-bottom: 1px solid var(--faint); }
+  .nav__macc-trigger {
+    display: flex; align-items: center; justify-content: space-between; width: 100%;
+    padding: 1.05rem 0; background: none; border: 0; cursor: pointer;
+    font-family: inherit; font-size: 1.3rem; font-weight: 600; color: var(--ink);
+  }
+  .nav__macc-chev {
+    flex: 0 0 auto; width: 0.55rem; height: 0.55rem; margin-right: 5px;
+    border-right: 2px solid currentColor; border-bottom: 2px solid currentColor;
+    transform: rotate(45deg); opacity: 0.5; transition: transform 0.25s var(--ease-out);
+  }
+  .nav__macc.is-open .nav__macc-chev { transform: rotate(-135deg); }
+  .nav__macc-panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.3s var(--ease-out); }
+  .nav__macc.is-open .nav__macc-panel { grid-template-rows: 1fr; }
+  .nav__macc-inner { overflow: hidden; }
+  .nav__macc-link {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0.55rem 0; color: var(--muted); text-decoration: none; font-size: 1.05rem;
+  }
+  .nav__macc-link:first-child { padding-top: 0.2rem; }
+  .nav__macc-link:last-child { padding-bottom: 1rem; }
+  .nav__macc-link[aria-current='page'] { color: var(--accent); font-weight: 600; }
+
+  .nav__mcta {
+    margin-top: 1.75rem; text-align: center;
+    background: var(--accent); color: var(--ink); font-weight: 700; font-size: 1.05rem;
+    padding: 1rem; border-radius: 100px; text-decoration: none;
+  }
+
+  /* Responsive switch — full nav hides, hamburger appears (matches global .nav__links @860) */
+  @media (max-width: 860px) {
+    .nav__burger { display: inline-flex; }
+  }
+  @media (min-width: 861px) {
+    .nav__mobile { display: none !important; }
+  }
+  @media (max-width: 420px) {
+    .nav__cta { display: none; }
+  }
 </style>

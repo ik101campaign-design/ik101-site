@@ -198,7 +198,7 @@ body {
 .hero > *:nth-child(5) { animation-delay: 0.49s; }
 @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
 
-@media (max-width: 768px) {
+@media (max-width: 860px) {
   .nav__links { display: none; }
 }
 @media (prefers-reduced-motion: reduce) {
