@@ -1,0 +1,206 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import SiteNav from '../../components/SiteNav.astro';
+import { petitions } from '../../data/petitions';
+
+export function getStaticPaths() {
+  return petitions.map((petition) => ({
+    params: { slug: petition.slug },
+    props: { petition },
+  }));
+}
+
+const { petition } = Astro.props;
+---
+<Layout title={petition.title + ' | IK101'}>
+  <SiteNav current="/petitions" />
+
+  <main class="pd">
+    <div class="pd__inner">
+
+      <a class="pd__back" href="/petitions">&#8592; All petitions</a>
+
+      <div class="pd__hero-wrap">
+        <img
+          class="pd__hero"
+          src={'/petitions/' + petition.image}
+          alt={petition.title}
+          loading="eager"
+        />
+      </div>
+
+      <article class="pd__article">
+        <h1 class="pd__title">{petition.title}</h1>
+
+        <div class="pd__body">
+          {petition.body.map((para) => (
+            <p class="pd__para">{para}</p>
+          ))}
+        </div>
+
+        <a
+          class="pd__cta"
+          href={petition.link}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Sign the petition &#8599;
+        </a>
+      </article>
+
+    </div>
+  </main>
+
+  <footer class="pd__foot">
+    <p class="pd__foot-tagline">My Voice, My Pakistan, My Movement.</p>
+    <hr class="pd__foot-rule" />
+    <nav class="pd__foot-links">
+      <a href="/">Resources</a>
+      <a href="/">Connect</a>
+      <a href="/">Useful Links</a>
+    </nav>
+    <p class="pd__foot-copy">IK101 &copy; 2023</p>
+  </footer>
+
+  <style is:global>
+    /* ── Petition detail page ─────────────────────────────────────── */
+    .pd {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: clamp(2rem, 5vw, 3.5rem) 1.25rem 2rem;
+    }
+
+    .pd__inner {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    /* Back link */
+    .pd__back {
+      display: inline-flex;
+      align-items: center;
+      gap: .35rem;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: .88rem;
+      font-weight: 600;
+      letter-spacing: .01em;
+      margin-bottom: 2rem;
+      transition: color .18s;
+    }
+    .pd__back:hover { color: var(--accent); }
+
+    /* Hero image */
+    .pd__hero-wrap {
+      width: 100%;
+      max-height: 52vh;
+      border-radius: 16px;
+      overflow: hidden;
+      background: #f1f5f2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 2.25rem;
+    }
+    .pd__hero {
+      width: 100%;
+      height: 100%;
+      max-height: 52vh;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Article content */
+    .pd__article {
+      max-width: 62ch;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .pd__title {
+      font-size: clamp(1.7rem, 4.5vw, 2.8rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -.025em;
+      margin: 0 0 1.75rem;
+      color: var(--ink);
+    }
+
+    .pd__body {
+      margin-bottom: 2.25rem;
+    }
+
+    .pd__para {
+      color: var(--muted);
+      font-size: 1.05rem;
+      line-height: 1.72;
+      margin: 0 0 1.2rem;
+    }
+    .pd__para:last-child { margin-bottom: 0; }
+
+    /* CTA pill */
+    .pd__cta {
+      display: inline-flex;
+      align-items: center;
+      gap: .45rem;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 700;
+      font-size: 1rem;
+      text-decoration: none;
+      padding: .85rem 1.8rem;
+      border-radius: 100px;
+      letter-spacing: .01em;
+      transition: background .2s var(--ease-out), transform .18s var(--ease-out);
+    }
+    .pd__cta:hover {
+      background: #00a855;
+      transform: translateY(-1px);
+    }
+
+    /* Footer */
+    .pd__foot {
+      border-top: 1px solid var(--faint);
+      margin-top: clamp(3rem, 8vw, 5rem);
+      padding: 3rem 1.25rem;
+      text-align: center;
+    }
+    .pd__foot-tagline {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin: 0 0 1.5rem;
+      letter-spacing: .01em;
+    }
+    .pd__foot-rule {
+      border: none;
+      border-top: 1px solid var(--faint);
+      margin: 0 auto 1.5rem;
+      max-width: 320px;
+    }
+    .pd__foot-links {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+    }
+    .pd__foot-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: .9rem;
+    }
+    .pd__foot-links a:hover { color: var(--ink); }
+    .pd__foot-copy {
+      color: var(--muted);
+      font-size: .8rem;
+      margin: 0;
+    }
+
+    @media (max-width: 560px) {
+      .pd__hero-wrap { max-height: 42vw; border-radius: 12px; }
+      .pd__hero { max-height: 42vw; }
+      .pd__article { max-width: 100%; }
+    }
+  </style>
+</Layout>

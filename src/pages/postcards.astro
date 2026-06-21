@@ -1,0 +1,292 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SiteNav from '../components/SiteNav.astro';
+
+const IMG = '/postcards/';
+const DRIVE = 'https://drive.google.com/drive/folders/';
+const DOWNLOAD_ALL = DRIVE + '1U-Hio0z8I7dBizlwHgXtVcZM2jLeFCjj';
+
+// Series-level descriptions + download folders (from the original ik101.org/postcards)
+const series = {
+  'IK101 Light': {
+    desc: 'Dive into the luminous achievements of Imran Khan with our IK101 Light series. Each postcard shines a spotlight on pivotal steps taken for the betterment of Pakistan, illuminating the transformative journey under his visionary leadership. Let these beacons of progress inspire and uplift your spirit.',
+    dl: DRIVE + '1eBRMSbrx3_-0ox8WWaQk2hwcvnRNVsjD',
+  },
+  'IK101 Tribute': {
+    desc: 'The IK101 Tribute series features heartfelt expressions from artists who revere Imran Khan. These postcards capture why artists hold Khan in such high regard, celebrating his brilliant vision and unwavering leadership. Each artwork is a testament to the inspiration he provides, illuminating his journey and the ideals that continue to inspire a nation.',
+    dl: DRIVE + '1QPYBi-OKXvTif_Dw4vKX-jWYd_WXOSjQ',
+  },
+  'IK101 Champions': {
+    desc: 'Celebrate the unsung heroes in our IK101 Champions series. These postcards pay homage to the fearless warriors of Haqiqi Azaadi, who fought for true democracy and justice. Their unwavering courage and dedication serve as a testament to the power of resilience and truth.',
+    dl: DRIVE + '1L5Iyv7Sg--NmZCqS8JGlQLyDy0NP3e4V',
+  },
+  'Multilingual': {
+    desc: 'Unleash the power of civic participation with our Multilingual Postcards series. Crafted in various languages, these postcards aim to educate and inspire people to engage in the democratic process. Use of vernacular languages seeks to transform passive members into active, engaged citizens ready to shape their future.',
+    dl: DRIVE + '1tKU0q_ZqhPCweHtNNBy8F3AAExBYroIu',
+  },
+};
+
+const raw = [
+  { file: 'ik101-light-web---unity-in-diversity-dJoJz5eqlXtMy02Q.png', title: 'Unity in Diversity', series: 'IK101 Light', lang: '' },
+  { file: 'ik101-tribute-web---azadi-d95p27Dv2qu8r2VL.png', title: 'Azadi', series: 'IK101 Tribute', lang: '' },
+  { file: 'ik101-champions---arshad-sharif-mePLob5PBocL9zx4.png', title: 'Arshad Sharif', series: 'IK101 Champions', lang: '' },
+  { file: 'namunzur-web-pushto-dJoJz5K7zqfG5LEX.png', title: 'Na-Manzoor', series: 'Multilingual', lang: 'Pushto' },
+  { file: 'ik101-tribute-web---qaidi-x804-AoPeoqZk9RhM3XQX.png', title: 'Qaidi 804', series: 'IK101 Tribute', lang: '' },
+  { file: 'ik101-light-web---kamyab-jewan-prog-YBgpOelBkKUG0pob.png', title: 'Kamyab Jawan Program', series: 'IK101 Light', lang: '' },
+  { file: 'sindhi---web---la-illa-ha-mp8nlqV0Nni8b4R9.png', title: 'La Illa Ha', series: 'Multilingual', lang: 'Sindhi' },
+  { file: 'ik101-champions---tayyaba-raja-Yg2loqLxNPHoqBKd.png', title: 'Tayyaba Raja', series: 'IK101 Champions', lang: '' },
+  { file: 'ik101-tribute-web---kon-bachay-ga-pak-ALpJN7o8Krs9RoOo.png', title: 'Kon Bachay Ga Pakistan', series: 'IK101 Tribute', lang: '' },
+  { file: 'ik101-turkish_web-release-ik-ALpJN7rVx5f7pNqJ.png', title: 'Release Imran Khan', series: 'Multilingual', lang: 'Turkish' },
+  { file: 'ik101-light-web---un-resolution-AGBGEnMplPf3WDvG.png', title: 'UN Resolution', series: 'IK101 Light', lang: '' },
+  { file: 'punjabi---web---5-mP4pb2Ko6Nt4GJeE.png', title: 'Haqiqi Azadi', series: 'Multilingual', lang: 'Punjabi' },
+  { file: 'ik101-tribute-web---fight-is-in-the-mind-YD0pLB807KIvlxgj.png', title: 'The Fight Is in the Mind', series: 'IK101 Tribute', lang: '' },
+  { file: 'baluchi---web---khauuf-mxBreMVkkaTr2gZ1.png', title: 'Khauf', series: 'Multilingual', lang: 'Baluchi' },
+  { file: 'ik101_english_-6-x-4-in---png_10-Aq2BPqoZM5ieeQ3V.png', title: 'For the People', series: 'Multilingual', lang: 'English' },
+  { file: 'ik101_english_-6-x-4-in---no-minus-ik-dJoJz54lbktKB9Wk.png', title: 'No Minus IK', series: 'Multilingual', lang: 'English' },
+  { file: 'ik101_english_-6-x-4-in---png_12-mxBreM7zNkiPoOP3.png', title: 'Stand With Pakistan', series: 'Multilingual', lang: 'English' },
+  { file: 'ik101_english_-6-x-4-in---png_13-YBgpOeKql2IWoE2z.png', title: 'Voice of a Nation', series: 'Multilingual', lang: 'English' },
+];
+const cards = raw.map((c) => ({ ...c, desc: series[c.series].desc, dl: series[c.series].dl }));
+const filters = ['All', 'IK101 Light', 'IK101 Tribute', 'IK101 Champions', 'Multilingual'];
+---
+<Layout title="Global Postcards Amplify Human Rights & Democracy | IK101">
+  <SiteNav current="/postcards" />
+
+  <main class="pcg">
+    <section class="pcg__intro">
+      <p class="pcg__eyebrow">Postcards</p>
+      <h1 class="pcg__title">Raise awareness, spark conversations, &amp; ignite change.</h1>
+      <p class="pcg__lede">Artists around the world turned their work into powerful postcards for human rights and democracy — each one made to provoke thought, spark dialogue, and inspire real change. Swipe through the collection; every postcard is a free download to print, mail, and share.</p>
+      <a class="pcg__cta" href={DOWNLOAD_ALL} target="_blank" rel="noopener">Download your postcard</a>
+    </section>
+
+    <div class="pcg__pills" data-pills>
+      {filters.map((f, i) => (
+        <button class={`pcg__pill${i === 0 ? ' is-active' : ''}`} data-filter={f} type="button">{f}</button>
+      ))}
+    </div>
+
+    <div class="coverflow" data-cf aria-roledescription="carousel" aria-label="Postcard gallery">
+      <div class="coverflow__track">
+        {cards.map((c, i) => (
+          <figure class="pc" data-card data-series={c.series} data-title={c.title} data-lang={c.lang} data-desc={c.desc} data-dl={c.dl} data-index={i}>
+            <img src={IMG + c.file} alt={`${c.title}${c.lang ? ' — ' + c.lang : ''} postcard`} loading="lazy" draggable="false" />
+          </figure>
+        ))}
+      </div>
+    </div>
+
+    <div class="pcg__meta">
+      <p class="pcg__meta-title" data-cf-title>&nbsp;</p>
+      <p class="pcg__meta-sub" data-cf-sub>&nbsp;</p>
+    </div>
+
+    <div class="pcg__controls">
+      <button class="pcg__round" data-prev type="button" aria-label="Previous postcard">&#8592;</button>
+      <p class="pcg__counter"><b data-counter>1</b> / <span data-total>18</span></p>
+      <button class="pcg__round" data-next type="button" aria-label="Next postcard">&#8594;</button>
+    </div>
+    <p class="pcg__hint">Tap the centre postcard to read it &amp; download</p>
+
+    <section class="pcg__close">
+      <p class="pcg__statement">My Voice, My Pakistan, My Movement.</p>
+    </section>
+  </main>
+
+  <!-- Lightbox -->
+  <div class="lb" data-lb hidden>
+    <button class="lb__close" data-lb-close type="button" aria-label="Close">&#215;</button>
+    <div class="lb__card" data-lb-card>
+      <div class="lb__imgwrap"><img class="lb__img" data-lb-img src="" alt="" /></div>
+      <div class="lb__panel">
+        <p class="lb__sub" data-lb-sub></p>
+        <h2 class="lb__title" data-lb-title></h2>
+        <p class="lb__desc" data-lb-desc></p>
+        <a class="lb__dl" data-lb-dl href="#" target="_blank" rel="noopener">Get your postcard <span aria-hidden="true">&#8594;</span></a>
+      </div>
+    </div>
+  </div>
+
+  <footer class="pcg__foot">
+    <nav class="pcg__foot-links">
+      <a href="/">Resources</a><a href="/">Connect</a><a href="/">Useful Links</a>
+    </nav>
+    <p class="pcg__foot-copy">IK101 © 2023</p>
+  </footer>
+
+  <script>
+    const root = document.querySelector<HTMLElement>('[data-cf]');
+    const all = Array.from(document.querySelectorAll<HTMLElement>('[data-card]'));
+    const titleEl = document.querySelector<HTMLElement>('[data-cf-title]');
+    const subEl = document.querySelector<HTMLElement>('[data-cf-sub]');
+    const counterEl = document.querySelector<HTMLElement>('[data-counter]');
+    const totalEl = document.querySelector<HTMLElement>('[data-total]');
+    const pills = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-filter]'));
+
+    if (root && titleEl && subEl) {
+      const lb = document.querySelector<HTMLElement>('[data-lb]')!;
+      const lbImg = document.querySelector<HTMLImageElement>('[data-lb-img]')!;
+      const lbTitle = document.querySelector<HTMLElement>('[data-lb-title]')!;
+      const lbSub = document.querySelector<HTMLElement>('[data-lb-sub]')!;
+      const lbDesc = document.querySelector<HTMLElement>('[data-lb-desc]')!;
+      const lbDl = document.querySelector<HTMLAnchorElement>('[data-lb-dl]')!;
+      const SPRING = 'cubic-bezier(.34,1.56,.64,1)';
+      const EASE = 'cubic-bezier(.16,1,.3,1)';
+      let lbAnim: Animation | null = null;
+
+      function openLb(card: HTMLElement) {
+        lbImg.src = card.querySelector('img')!.src;
+        lbImg.alt = card.dataset.title || '';
+        lbTitle.textContent = card.dataset.title || '';
+        lbSub.textContent = [card.dataset.series, card.dataset.lang].filter(Boolean).join('  ·  ');
+        lbDesc.textContent = card.dataset.desc || '';
+        lbDl.href = card.dataset.dl || '#';
+        lb.hidden = false;
+        document.body.style.overflow = 'hidden';
+        if (lbAnim) lbAnim.cancel();
+        lbAnim = lb.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 220, easing: 'ease' });
+        lbImg.animate(
+          [{ transform: 'scale(.86) translateY(18px)', opacity: 0 }, { transform: 'scale(1) translateY(0)', opacity: 1 }],
+          { duration: 520, easing: SPRING },
+        );
+        [lbSub, lbTitle, lbDesc, lbDl].forEach((el, i) => el.animate(
+          [{ transform: 'translateY(14px)', opacity: 0 }, { transform: 'translateY(0)', opacity: 1 }],
+          { duration: 460, delay: 130 + i * 70, easing: EASE, fill: 'backwards' },
+        ));
+      }
+      function closeLb() {
+        if (lbAnim) lbAnim.cancel();
+        lbAnim = lb.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 180, easing: 'ease' });
+        lbAnim.onfinish = () => { lb.hidden = true; document.body.style.overflow = ''; };
+      }
+      document.querySelector('[data-lb-close]')!.addEventListener('click', closeLb);
+      lb.addEventListener('click', (e) => { if (e.target === lb) closeLb(); });
+
+      let filter = 'All';
+      let visible = all.slice();
+      let active = 0;
+      const SPACING = 270;
+      const ANGLE = 25;
+      const MAXVIS = 3;
+      const matches = (card: HTMLElement) => filter === 'All' || card.dataset.series === filter;
+
+      function layout() {
+        all.forEach((card) => { card.style.display = matches(card) ? '' : 'none'; });
+        visible = all.filter(matches);
+        active = Math.max(0, Math.min(active, visible.length - 1));
+        visible.forEach((card, i) => {
+          const off = i - active;
+          const abs = Math.abs(off);
+          const sign = Math.sign(off);
+          const clamped = Math.min(abs, MAXVIS);
+          card.style.transform =
+            `translate(-50%, -50%) translateX(${off * SPACING}px) ` +
+            `rotateY(${-sign * clamped * ANGLE}deg) scale(${Math.max(1 - abs * 0.12, 0.58)})`;
+          card.style.zIndex = String(100 - clamped);
+          card.style.opacity = abs > MAXVIS ? '0' : String(Math.max(1 - abs * 0.16, 0.28));
+          card.style.pointerEvents = abs > MAXVIS ? 'none' : 'auto';
+          const isActive = off === 0;
+          card.classList.toggle('is-active', isActive);
+          card.onclick = () => { if (isActive) openLb(card); else { active = i; layout(); } };
+        });
+        const cur = visible[active];
+        if (cur) {
+          titleEl!.textContent = cur.dataset.title || ' ';
+          subEl!.textContent = [cur.dataset.series, cur.dataset.lang].filter(Boolean).join('  ·  ') || ' ';
+        }
+        if (counterEl) counterEl.textContent = String(visible.length ? active + 1 : 0);
+        if (totalEl) totalEl.textContent = String(visible.length);
+      }
+      const go = (d: number) => { active = Math.max(0, Math.min(visible.length - 1, active + d)); layout(); };
+
+      document.querySelector('[data-prev]')!.addEventListener('click', () => go(-1));
+      document.querySelector('[data-next]')!.addEventListener('click', () => go(1));
+      window.addEventListener('keydown', (e) => {
+        if (!lb.hidden) { if (e.key === 'Escape') closeLb(); return; }
+        if (e.key === 'ArrowLeft') go(-1);
+        if (e.key === 'ArrowRight') go(1);
+      });
+      pills.forEach((p) => p.addEventListener('click', () => {
+        pills.forEach((q) => q.classList.remove('is-active'));
+        p.classList.add('is-active');
+        filter = p.dataset.filter || 'All';
+        active = Math.floor(all.filter(matches).length / 2);
+        layout();
+      }));
+
+      let down = false, startX = 0, moved = 0;
+      root.addEventListener('pointerdown', (e) => { down = true; startX = e.clientX; moved = 0; });
+      root.addEventListener('pointermove', (e) => { if (down) moved = e.clientX - startX; });
+      const release = () => { if (!down) return; down = false; if (Math.abs(moved) > 60) go(moved < 0 ? 1 : -1); };
+      root.addEventListener('pointerup', release);
+      root.addEventListener('pointercancel', release);
+
+      active = Math.floor(visible.length / 2);
+      layout();
+    }
+  </script>
+
+  <style is:global>
+    .pcg { max-width: 1320px; margin: 0 auto; padding: clamp(1rem, 3vw, 2.5rem) 1.25rem 2rem; text-align: center; }
+    .pcg__intro { max-width: 60ch; margin: 0 auto; }
+    .pcg__eyebrow { color: var(--accent); font-weight: 600; letter-spacing: .14em; text-transform: uppercase; font-size: .8rem; margin: 0 0 1rem; }
+    .pcg__title { font-size: clamp(2rem, 4.6vw, 3.4rem); line-height: 1.06; letter-spacing: -.025em; font-weight: 700; margin: 0 auto 1.1rem; max-width: 20ch; }
+    .pcg__lede { color: var(--muted); font-size: 1.05rem; line-height: 1.62; margin: 0 auto 2rem; }
+    .pcg__cta { display: inline-block; background: var(--accent); color: var(--ink); font-weight: 600; font-size: .95rem; text-decoration: none; padding: .85rem 1.8rem; border-radius: 100px; transition: transform .2s var(--ease-out), filter .2s; }
+    .pcg__cta:hover { transform: translateY(-1px); filter: brightness(1.05); }
+
+    .pcg__pills { display: flex; flex-wrap: wrap; justify-content: center; gap: .6rem; margin: clamp(1.5rem, 4vw, 2.75rem) 0 clamp(1rem, 3vw, 2rem); }
+    .pcg__pill { font-family: inherit; font-size: .9rem; font-weight: 500; color: var(--ink); background: #fff; border: 1px solid var(--faint); border-radius: 100px; padding: .55rem 1.2rem; cursor: pointer; transition: all .2s; white-space: nowrap; }
+    .pcg__pill:hover { border-color: var(--accent); }
+    .pcg__pill.is-active { background: var(--ink); color: #fff; border-color: var(--ink); }
+
+    .coverflow { position: relative; height: clamp(300px, 38vw, 430px); perspective: 1700px; margin: 0 auto; touch-action: pan-y; cursor: grab; }
+    .coverflow:active { cursor: grabbing; }
+    .coverflow__track { position: absolute; inset: 0; transform-style: preserve-3d; }
+    .pc { position: absolute; left: 50%; top: 50%; margin: 0; width: clamp(280px, 34vw, 400px); aspect-ratio: 1 / 1; transform: translate(-50%, -50%); transition: transform .5s var(--ease-out), opacity .5s; will-change: transform; }
+    .pc img { width: 100%; height: 100%; object-fit: contain; border-radius: 14px; background: #fafbfa; box-shadow: 0 16px 44px rgba(20,40,28,.16); user-select: none; }
+    .pc.is-active { cursor: zoom-in; }
+    .pc.is-active img { box-shadow: 0 28px 66px rgba(20,40,28,.26), 0 0 0 1px var(--accent-soft); }
+
+    .pcg__meta { min-height: 3.8rem; margin-top: 1.6rem; }
+    .pcg__meta-title { font-size: 1.5rem; font-weight: 700; letter-spacing: -.01em; margin: 0 0 .25rem; }
+    .pcg__meta-sub { color: var(--accent); font-weight: 600; font-size: .85rem; letter-spacing: .08em; text-transform: uppercase; margin: 0; }
+
+    .pcg__controls { display: flex; align-items: center; justify-content: center; gap: 1.4rem; margin-top: 1.2rem; }
+    .pcg__round { width: 3rem; height: 3rem; border-radius: 50%; border: 1px solid var(--faint); background: #fff; color: var(--ink); font-size: 1.1rem; cursor: pointer; display: grid; place-items: center; transition: all .2s; }
+    .pcg__round:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
+    .pcg__counter { color: var(--muted); font-size: .9rem; font-variant-numeric: tabular-nums; margin: 0; }
+    .pcg__counter b { color: var(--ink); }
+    .pcg__hint { color: var(--muted); font-size: .8rem; margin: 1rem 0 0; opacity: .8; }
+
+    .pcg__close { margin-top: clamp(3rem, 8vw, 6rem); }
+    .pcg__statement { font-size: clamp(1.6rem, 4vw, 2.6rem); font-weight: 700; letter-spacing: -.02em; margin: 0; }
+
+    /* Lightbox */
+    .lb { position: fixed; inset: 0; z-index: 200; display: grid; place-items: center; padding: clamp(1rem, 4vw, 3rem); background: rgba(16,24,20,.6); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); }
+    .lb__card { display: flex; gap: clamp(1.5rem, 3vw, 2.75rem); align-items: center; width: 100%; max-width: 860px; background: #fff; border-radius: 22px; padding: clamp(1.25rem, 2.5vw, 2rem); box-shadow: 0 40px 100px rgba(0,0,0,.4); max-height: 88vh; }
+    .lb__imgwrap { flex: 0 0 44%; }
+    .lb__img { width: 100%; aspect-ratio: 1 / 1; object-fit: contain; border-radius: 14px; background: #fafbfa; }
+    .lb__panel { flex: 1; text-align: left; min-width: 0; }
+    .lb__sub { color: var(--accent); font-weight: 600; font-size: .78rem; letter-spacing: .1em; text-transform: uppercase; margin: 0 0 .5rem; }
+    .lb__title { font-size: clamp(1.4rem, 2.4vw, 1.9rem); font-weight: 700; letter-spacing: -.015em; margin: 0 0 .9rem; }
+    .lb__desc { color: var(--muted); font-size: .96rem; line-height: 1.62; margin: 0 0 1.5rem; }
+    .lb__dl { display: inline-flex; align-items: center; gap: .5rem; background: var(--accent); color: var(--ink); font-weight: 600; text-decoration: none; padding: .75rem 1.6rem; border-radius: 100px; transition: filter .2s, transform .2s; }
+    .lb__dl:hover { filter: brightness(1.05); transform: translateY(-1px); }
+    .lb__close { position: fixed; top: 1.25rem; right: 1.5rem; width: 2.75rem; height: 2.75rem; border-radius: 50%; border: 0; background: rgba(255,255,255,.16); color: #fff; font-size: 1.6rem; line-height: 1; cursor: pointer; transition: background .2s; }
+    .lb__close:hover { background: rgba(255,255,255,.3); }
+
+    .pcg__foot { border-top: 1px solid var(--faint); margin-top: clamp(3rem, 8vw, 6rem); padding: 3rem 1.25rem; text-align: center; }
+    .pcg__foot-links { display: flex; gap: 2rem; justify-content: center; margin-bottom: 1.5rem; }
+    .pcg__foot-links a { color: var(--muted); text-decoration: none; font-size: .9rem; }
+    .pcg__foot-links a:hover { color: var(--ink); }
+    .pcg__foot-copy { color: var(--muted); font-size: .8rem; margin: 0; }
+
+    @media (max-width: 680px) {
+      .lb__card { flex-direction: column; align-items: stretch; overflow-y: auto; text-align: center; }
+      .lb__panel { text-align: center; }
+      .lb__imgwrap { flex: none; }
+    }
+    @media (prefers-reduced-motion: reduce) { .pc { transition: none; } }
+  </style>
+</Layout>

@@ -1,0 +1,132 @@
+---
+// Shared top navigation with dropdowns (mirrors the old ik101.org nav).
+// Pass `current` (e.g. "/postcards") to highlight the active item.
+interface Props { current?: string }
+const { current } = Astro.props;
+
+const navItems: Array<{ label: string; href?: string; menu?: Array<{ label: string; href: string; ext: boolean }> }> = [
+  { label: 'Spirit', href: '/spirit-of-ik101' },
+  { label: 'Resources', menu: [
+    { label: 'AI 4 IK101',        href: 'https://drive.google.com/drive/folders/1SG9XBBLVZOWCMpA94GON1lXJLjZhDtup', ext: true },
+    { label: 'Digital Gallery',   href: 'https://drive.google.com/drive/folders/1a2c0ytJWwS6TrfBuLLfH1DeQUCcRBFio', ext: true },
+    { label: 'Flyers',            href: 'https://drive.google.com/drive/folders/19sCV_szcgj98W98Kk7HI9XcjgLPikGLR', ext: true },
+    { label: 'Petitions',         href: '/petitions', ext: false },
+    { label: 'Postcards',         href: '/postcards', ext: false },
+    { label: 'Truth 2 Power Hub', href: 'https://www.youtube.com/@truth2powerhub', ext: true },
+  ] },
+  { label: 'Join the Community', menu: [
+    { label: 'Ambassador', href: '/ambassador', ext: false },
+    { label: 'Artist',     href: '/artist',     ext: false },
+    { label: 'Volunteer',  href: '/volunteer',  ext: false },
+  ] },
+  { label: 'Languages', menu: [
+    { label: 'العربية · Arabic', href: '/arabic',  ext: false },
+    { label: 'Dansk · Danish',   href: '/danish',  ext: false },
+    { label: 'Español · Spanish', href: '/spanish', ext: false },
+    { label: 'Türkçe · Turkish', href: '/turkish', ext: false },
+    { label: 'اردو · Urdu',      href: '/urdu',    ext: false },
+  ] },
+  { label: 'Connect', href: '/connect' },
+];
+---
+<header class="nav">
+  <a class="nav__logo" href="/">IK101</a>
+  <nav class="nav__links">
+    {navItems.map((item) => item.menu ? (
+      <div class="nav__drop">
+        <button class="nav__link nav__drop-trigger" type="button" aria-haspopup="true" aria-expanded="false">
+          {item.label} <span class="nav__chev" aria-hidden="true"></span>
+        </button>
+        <div class="nav__menu" role="menu">
+          {item.menu.map((r) => (
+            <a
+              class="nav__menu-item"
+              role="menuitem"
+              href={r.href}
+              aria-current={current === r.href ? 'page' : undefined}
+              target={r.ext ? '_blank' : undefined}
+              rel={r.ext ? 'noopener' : undefined}
+            >
+              <span>{r.label}</span>
+              {r.ext && <span class="nav__ext" aria-hidden="true">&#8599;</span>}
+            </a>
+          ))}
+        </div>
+      </div>
+    ) : (
+      <a class="nav__link" href={item.href} aria-current={current === item.href ? 'page' : undefined}>{item.label}</a>
+    ))}
+  </nav>
+  <a class="nav__cta" href="/#globe">Add your voice</a>
+</header>
+
+<script>
+  const nav = document.querySelector('.nav');
+  if (nav) {
+    const onScroll = () => nav.classList.toggle('is-float', window.scrollY > 24);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  }
+  // Multiple dropdowns: hover + focus-within (CSS) cover desktop; this adds click/touch + a11y.
+  const drops = Array.from(document.querySelectorAll<HTMLElement>('.nav__drop'));
+  const closeAll = () => drops.forEach((d) => {
+    d.classList.remove('is-open');
+    d.querySelector('.nav__drop-trigger')?.setAttribute('aria-expanded', 'false');
+  });
+  drops.forEach((drop) => {
+    const trigger = drop.querySelector('.nav__drop-trigger');
+    trigger?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const willOpen = !drop.classList.contains('is-open');
+      closeAll();
+      if (willOpen) { drop.classList.add('is-open'); trigger.setAttribute('aria-expanded', 'true'); }
+    });
+  });
+  document.addEventListener('click', closeAll);
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeAll(); });
+</script>
+
+<style>
+  .nav__link, .nav__cta { text-decoration: none; }
+
+  .nav__drop { position: relative; }
+  .nav__drop-trigger { display: inline-flex; align-items: center; gap: 0.35rem; }
+  .nav__chev {
+    width: 0.46rem; height: 0.46rem;
+    border-right: 1.6px solid currentColor; border-bottom: 1.6px solid currentColor;
+    transform: rotate(45deg) translate(-1px, -2px); opacity: 0.65;
+    transition: transform 0.22s var(--ease-out);
+  }
+  .nav__drop:hover .nav__chev,
+  .nav__drop:focus-within .nav__chev,
+  .nav__drop.is-open .nav__chev { transform: rotate(225deg) translate(-2px, -2px); }
+
+  .nav__drop::after { content: ''; position: absolute; left: 0; right: 0; top: 100%; height: 0.7rem; }
+
+  .nav__menu {
+    position: absolute; top: 100%; left: 50%; translate: -50% 0; margin-top: 0.7rem;
+    min-width: 220px; padding: 0.5rem;
+    background: rgba(255, 255, 255, 0.99);
+    -webkit-backdrop-filter: blur(18px) saturate(1.6); backdrop-filter: blur(18px) saturate(1.6);
+    border: 1px solid var(--faint); border-radius: 16px;
+    box-shadow: 0 18px 44px rgba(20, 40, 28, 0.16);
+    display: grid; gap: 1px; z-index: 60;
+    opacity: 0; visibility: hidden; transform: translateY(8px);
+    transition: opacity 0.2s var(--ease-out), transform 0.2s var(--ease-out), visibility 0.2s;
+  }
+  .nav__drop:hover .nav__menu,
+  .nav__drop:focus-within .nav__menu,
+  .nav__drop.is-open .nav__menu { opacity: 1; visibility: visible; transform: translateY(0); }
+
+  .nav__menu-item {
+    display: flex; align-items: center; justify-content: space-between; gap: 1.25rem;
+    padding: 0.6rem 0.8rem; border-radius: 10px;
+    color: var(--ink); text-decoration: none; font-size: 0.92rem; white-space: nowrap;
+    transition: background 0.15s, color 0.15s;
+  }
+  .nav__menu-item:hover { background: var(--accent-soft); color: var(--accent); }
+  .nav__menu-item[aria-current='page'] { color: var(--accent); font-weight: 600; }
+  .nav__ext { font-size: 0.72rem; opacity: 0.5; }
+
+  @media (max-width: 860px) { .nav__drop { display: none; } }
+</style>

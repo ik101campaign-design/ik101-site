@@ -1,0 +1,77 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SiteNav from '../components/SiteNav.astro';
+import { petitions } from '../data/petitions';
+---
+<Layout title="Petitions — Sign for Democracy & Human Rights | IK101">
+  <SiteNav current="/petitions" />
+
+  <main class="pet">
+    <header class="pet__head">
+      <p class="pet__eyebrow">Petitions</p>
+      <h1 class="pet__title">Add your name. Change the story.</h1>
+      <p class="pet__lede">Every signature is pressure the regime can't ignore. Browse the campaigns below and sign the ones that move you — for Imran Khan's freedom, for democracy, and for human rights in Pakistan.</p>
+      <p class="pet__count">{petitions.length} active campaigns</p>
+    </header>
+
+    <ul class="pet__list">
+      {petitions.map((p) => {
+        const excerpt = p.body[0].length > 170
+          ? p.body[0].slice(0, 170).trimEnd() + '…'
+          : p.body[0];
+        return (
+          <li class="pet__item">
+            <a class="pet__link" href={`/petitions/${p.slug}`}>
+              <span class="pet__thumb"><img src={'/petitions/' + p.image} alt={p.title} loading="lazy" /></span>
+              <span class="pet__body">
+                <span class="pet__item-title">{p.title}</span>
+                <span class="pet__excerpt">{excerpt}</span>
+                <span class="pet__cta">Read &amp; sign <span class="pet__arrow" aria-hidden="true">&#8594;</span></span>
+              </span>
+            </a>
+          </li>
+        );
+      })}
+    </ul>
+  </main>
+
+  <footer class="pet__foot">
+    <nav class="pet__foot-links"><a href="/">Resources</a><a href="/">Connect</a><a href="/">Useful Links</a></nav>
+    <p class="pet__foot-copy">IK101 &copy; 2023</p>
+  </footer>
+
+  <style is:global>
+    .pet { max-width: 880px; margin: 0 auto; padding: clamp(2rem, 5vw, 4rem) 1.25rem 2rem; }
+    .pet__head { text-align: center; max-width: 56ch; margin: 0 auto clamp(2.5rem, 6vw, 4rem); }
+    .pet__eyebrow { color: var(--accent); font-weight: 600; letter-spacing: .14em; text-transform: uppercase; font-size: .8rem; margin: 0 0 1rem; }
+    .pet__title { font-size: clamp(2.1rem, 5vw, 3.4rem); line-height: 1.05; letter-spacing: -.025em; font-weight: 700; margin: 0 0 1.1rem; }
+    .pet__lede { color: var(--muted); font-size: 1.08rem; line-height: 1.62; margin: 0 0 1.4rem; }
+    .pet__count { display: inline-block; color: var(--accent); background: var(--accent-soft); border: 1px solid rgba(0,191,99,.2); border-radius: 100px; padding: .35rem 1rem; font-size: .82rem; font-weight: 600; margin: 0; }
+
+    .pet__list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--faint); }
+    .pet__item { border-bottom: 1px solid var(--faint); }
+    .pet__link { display: flex; gap: clamp(1rem, 3vw, 2rem); align-items: center; padding: 1.5rem .5rem; text-decoration: none; color: inherit; border-radius: 16px; transition: background .2s var(--ease-out); }
+    .pet__link:hover { background: #fafdfb; }
+    .pet__thumb { flex: 0 0 auto; width: clamp(120px, 22vw, 200px); aspect-ratio: 4 / 3; border-radius: 12px; overflow: hidden; background: #f1f5f2; }
+    .pet__thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s var(--ease-out); }
+    .pet__link:hover .pet__thumb img { transform: scale(1.05); }
+    .pet__body { flex: 1; min-width: 0; }
+    .pet__item-title { display: block; font-size: clamp(1.05rem, 2vw, 1.3rem); font-weight: 700; line-height: 1.25; letter-spacing: -.01em; margin-bottom: .5rem; transition: color .2s; }
+    .pet__link:hover .pet__item-title { color: var(--accent); }
+    .pet__excerpt { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; color: var(--muted); font-size: .95rem; line-height: 1.55; margin-bottom: .7rem; }
+    .pet__cta { display: inline-flex; align-items: center; gap: .4rem; color: var(--accent); font-weight: 600; font-size: .88rem; }
+    .pet__arrow { transition: transform .2s var(--ease-out); }
+    .pet__link:hover .pet__arrow { transform: translateX(4px); }
+
+    .pet__foot { border-top: 1px solid var(--faint); margin-top: clamp(3rem, 8vw, 5rem); padding: 3rem 1.25rem; text-align: center; }
+    .pet__foot-links { display: flex; gap: 2rem; justify-content: center; margin-bottom: 1.5rem; }
+    .pet__foot-links a { color: var(--muted); text-decoration: none; font-size: .9rem; }
+    .pet__foot-links a:hover { color: var(--ink); }
+    .pet__foot-copy { color: var(--muted); font-size: .8rem; margin: 0; }
+
+    @media (max-width: 560px) {
+      .pet__link { flex-direction: column; align-items: stretch; gap: .9rem; }
+      .pet__thumb { width: 100%; aspect-ratio: 16 / 9; }
+    }
+  </style>
+</Layout>

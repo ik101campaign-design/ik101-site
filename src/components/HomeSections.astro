@@ -1,0 +1,120 @@
+---
+// The rest of the old ik101.org homepage, shown below the globe hero.
+const IMG = '/home/';
+const voices = [
+  {
+    title: 'Azad Pakistan',
+    img: 'myazadpak_website-mnl98wnqGQiGQbGe.png',
+    text: "In my truly independent Pakistan… This phrase represents the beginning of a powerful dialogue, where every Pakistani can contribute their vision of what true independence means to them. Whether it's about justice, equality, education, or governance, we want to know: How do you picture Haqiqi Azadi?",
+    cta: 'Explore Azad Pakistan',
+    href: 'https://drive.google.com/drive/folders/1y1wcxBcLuSPnApMP8oB-Bch9xHGqdhRs?usp=sharing',
+  },
+  {
+    title: 'SOS Capt. Gulsher',
+    img: 'sos---capt-gulsher-m7VKvOV2GniLR5oq.png',
+    text: 'As Pakistan faced the aftermath of a regime change, Captain Gulsher, character of a young army officer known from the 90s Pakistani drama serial Sunehray Din, became the voice of the masses and a conduit between them and the ruling quarters. This social media response relayed public reactions post April 9th, 2022, and served as a rallying cry for true freedom.',
+    cta: 'Watch the series',
+    href: 'https://youtube.com/playlist?list=PLo91venkyugDJV90LZw4VLiQyN3QhAxNL&si=KhSMgN_gnF_rBqkr',
+  },
+  {
+    title: 'Symbols of Democracy',
+    img: 'symbols-of-democracy-mePnE7ORO4Feb540.png',
+    text: "When the fascist regime tried to sabotage the 2024 general elections by taking away the largest political party's election symbol (the cricket bat), IK101 Ambassadors sprang into action — using social media and AI to creatively highlight each candidate's new symbol, from fruits and vegetables to everyday items, so voters could still identify and support their candidates.",
+    cta: 'See the symbols',
+    href: 'https://youtube.com/playlist?list=PLo91venkyugCHT44o-5zCIWY1Ba62JBOo&feature=shared',
+  },
+];
+const join = [
+  { title: 'Ambassador', img: 'ik101-student---1-d95pL2wNZBTvbDQo.png', text: 'Go door-to-door for positive leadership — mail postcards, sign petitions, and amplify our voices.', href: '/ambassador' },
+  { title: 'Artist', img: 'ik101-student---2-AR0JoXvpMoI8BqeY.png', text: 'Let your art be the voice for change — featured on global postcards and across platforms.', href: '/artist' },
+  { title: 'Volunteer', img: 'ik101-student---3-Y4L41wNnPOFroxyp.png', text: 'Put your skills to work — translation, design, research, social media, and more.', href: '/volunteer' },
+];
+---
+<section class="hm">
+  <!-- 101 Sparks -->
+  <div class="hm-sparks">
+    <p class="hm-eyebrow">101 Sparks For A Progressive Pakistan</p>
+    <h2 class="hm-sparks__head">IK101 is a citizens initiative that celebrates Imran Khan's quest for a stronger, united Pakistan &amp; invites <span class="hm-accent">"101 Sparks of Progress"</span> to rebuild collectively.</h2>
+    <img class="hm-sparks__img" src={IMG + '101-sparks-YBgpvoDK8eHBqnVr.png'} alt="101 Sparks for a Progressive Pakistan" loading="lazy" />
+  </div>
+
+  <!-- Collective voices -->
+  <div class="hm-block">
+    <h2 class="hm-block__head">IK101 thrives on collective voices.</h2>
+    <div class="hm-grid">
+      {voices.map((v) => (
+        <article class="hm-card">
+          <div class="hm-card__media"><img src={IMG + v.img} alt={v.title} loading="lazy" /></div>
+          <h3 class="hm-card__title">{v.title}</h3>
+          <p class="hm-card__text">{v.text}</p>
+          <a class="hm-card__link" href={v.href} target="_blank" rel="noopener">{v.cta} <span aria-hidden="true">&#8599;</span></a>
+        </article>
+      ))}
+    </div>
+  </div>
+
+  <!-- Join the movement -->
+  <div class="hm-block">
+    <h2 class="hm-block__head">Join the Movement.</h2>
+    <p class="hm-block__sub">There's no single place you need to be. Step into this dynamic circle — every step, every conversation matters.</p>
+    <div class="hm-grid">
+      {join.map((j) => (
+        <a class="hm-join" href={j.href}>
+          <div class="hm-join__media"><img src={IMG + j.img} alt={j.title} loading="lazy" /></div>
+          <h3 class="hm-join__title">{j.title}</h3>
+          <p class="hm-join__text">{j.text}</p>
+          <span class="hm-card__link">Get involved <span aria-hidden="true">&#8594;</span></span>
+        </a>
+      ))}
+    </div>
+  </div>
+
+  <p class="hm-statement">My Voice, My Pakistan, My Movement.</p>
+
+  <footer class="hm-foot">
+    <nav class="hm-foot__links"><a href="/#resources">Resources</a><a href="/connect">Connect</a><a href="/useful-links">Useful Links</a></nav>
+    <p class="hm-foot__copy">IK101 &copy; 2023</p>
+  </footer>
+</section>
+
+<style is:global>
+  .hm { max-width: 1240px; margin: 0 auto; padding: clamp(2rem, 6vw, 5rem) 1.25rem 0; }
+  .hm-eyebrow { color: var(--accent); font-weight: 600; letter-spacing: .14em; text-transform: uppercase; font-size: .8rem; margin: 0 0 1.2rem; text-align: center; }
+  .hm-accent { color: var(--accent); }
+
+  .hm-sparks { text-align: center; max-width: 60ch; margin: 0 auto clamp(3rem, 8vw, 6rem); }
+  .hm-sparks__head { font-size: clamp(1.6rem, 3.4vw, 2.6rem); line-height: 1.18; letter-spacing: -.02em; font-weight: 700; margin: 0 0 2.5rem; }
+  .hm-sparks__img { width: 100%; max-width: 920px; border-radius: 20px; box-shadow: 0 24px 60px rgba(20,40,28,.12); }
+
+  .hm-block { margin-bottom: clamp(3rem, 8vw, 6rem); }
+  .hm-block__head { font-size: clamp(1.6rem, 3.4vw, 2.4rem); font-weight: 700; letter-spacing: -.02em; text-align: center; margin: 0 0 .8rem; }
+  .hm-block__sub { text-align: center; color: var(--muted); max-width: 52ch; margin: 0 auto 2.5rem; line-height: 1.6; }
+  .hm-block__head + .hm-grid { margin-top: 2.5rem; }
+
+  .hm-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+
+  .hm-card { display: flex; flex-direction: column; background: #fff; border: 1px solid var(--faint); border-radius: 20px; overflow: hidden; padding-bottom: 1.5rem; transition: transform .25s var(--ease-out), box-shadow .25s; }
+  .hm-card:hover { transform: translateY(-3px); box-shadow: 0 20px 44px rgba(20,40,28,.1); }
+  .hm-card__media { aspect-ratio: 16 / 11; overflow: hidden; background: #f1f5f2; }
+  .hm-card__media img { width: 100%; height: 100%; object-fit: cover; }
+  .hm-card__title { font-size: 1.25rem; font-weight: 700; letter-spacing: -.01em; margin: 1.3rem 1.5rem .6rem; }
+  .hm-card__text { color: var(--muted); font-size: .95rem; line-height: 1.6; margin: 0 1.5rem 1.2rem; flex: 1; }
+  .hm-card__link { display: inline-flex; align-items: center; gap: .4rem; color: var(--accent); font-weight: 600; font-size: .9rem; text-decoration: none; margin: 0 1.5rem; }
+  .hm-card__link:hover { gap: .65rem; }
+
+  .hm-join { display: flex; flex-direction: column; background: #fff; border: 1px solid var(--faint); border-radius: 20px; overflow: hidden; padding-bottom: 1.5rem; text-decoration: none; color: inherit; transition: transform .25s var(--ease-out), box-shadow .25s, border-color .25s; }
+  .hm-join:hover { transform: translateY(-3px); box-shadow: 0 20px 44px rgba(20,40,28,.1); border-color: var(--accent); }
+  .hm-join__media { aspect-ratio: 16 / 11; overflow: hidden; background: #f1f5f2; }
+  .hm-join__media img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s var(--ease-out); }
+  .hm-join:hover .hm-join__media img { transform: scale(1.05); }
+  .hm-join__title { font-size: 1.4rem; font-weight: 700; margin: 1.3rem 1.5rem .5rem; }
+  .hm-join__text { color: var(--muted); font-size: .95rem; line-height: 1.6; margin: 0 1.5rem 1.2rem; flex: 1; }
+
+  .hm-statement { text-align: center; font-size: clamp(1.8rem, 4.4vw, 3rem); font-weight: 700; letter-spacing: -.025em; margin: clamp(2rem, 5vw, 3rem) 0; }
+
+  .hm-foot { border-top: 1px solid var(--faint); padding: 3rem 1.25rem; text-align: center; }
+  .hm-foot__links { display: flex; gap: 2rem; justify-content: center; margin-bottom: 1.5rem; }
+  .hm-foot__links a { color: var(--muted); text-decoration: none; font-size: .9rem; }
+  .hm-foot__links a:hover { color: var(--ink); }
+  .hm-foot__copy { color: var(--muted); font-size: .8rem; margin: 0; }
+</style>

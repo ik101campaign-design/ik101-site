@@ -1,0 +1,274 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SiteNav from '../components/SiteNav.astro';
+---
+<Layout title="Ambassador | IK101">
+  <SiteNav current="/ambassador" />
+
+  <main class="amb">
+
+    <!-- HERO -->
+    <section class="amb-hero">
+      <p class="amb-eyebrow">Ambassador</p>
+      <h1 class="amb-title">Join us on a journey of grassroots activism.</h1>
+      <p class="amb-lede">Become #IK101 ambassador in action, going door-to-door, spreading the message of positive leadership and change. Every step, every conversation matters. Your commitment shapes the narrative, and together, we'll build a resilient, united Pakistan.</p>
+      <div class="amb-ctas">
+        <a class="amb-cta amb-cta--primary" href="https://drive.google.com/file/d/1S3frNxOnGer_Jdo34cPChupv7EqcIo4K/view?usp=sharing" target="_blank" rel="noopener">Ambassador Commitment</a>
+        <a class="amb-cta amb-cta--outline" href="https://drive.google.com/drive/folders/1XNpqmai0mFLsL2k-MEJnrhaBeg2DLIBK?usp=sharing" target="_blank" rel="noopener">Ambassador Badge</a>
+      </div>
+    </section>
+
+    <!-- ACTION CARDS -->
+    <section class="amb-features">
+
+      <!-- Card 1: image left -->
+      <div class="amb-row">
+        <div class="amb-row__img-wrap">
+          <img class="amb-row__img" src="/ambassador/mail-ik101-postcard-mjE2o70jyaIV6QJg.png" alt="Mail a Postcard" loading="lazy" />
+        </div>
+        <div class="amb-row__body">
+          <h2 class="amb-row__heading">Mail a Postcard</h2>
+          <p class="amb-row__text">Ready to make a difference? Join the IK101 movement with a dynamic postcard to spark conversation on positive change. Download and print template of your choice, in a language of your choice, highlight Imran Khan's most impactful achievement that resonates with you, present your unique idea for progress and mail the post card to a community influencer.</p>
+          <a class="amb-row__cta" href="/postcards">Mail a Postcard &#8594;</a>
+        </div>
+      </div>
+
+      <!-- Card 2: image right -->
+      <div class="amb-row amb-row--flip">
+        <div class="amb-row__img-wrap">
+          <img class="amb-row__img" src="/ambassador/sign-petition-A0xN6jq6PzH6jQl0.png" alt="Sign a Petition" loading="lazy" />
+        </div>
+        <div class="amb-row__body">
+          <h2 class="amb-row__heading">Sign a Petition</h2>
+          <p class="amb-row__text">Harness the power of your influence to advocate for democracy in Pakistan, demand an end to fascism against the world's sixth-largest political party, and protest the illegal detention of Imran Khan, Pakistan's most popular leader. Download the templates; add your insights, share your appeal with local political representatives, ambassadors, and influential figures.</p>
+          <a class="amb-row__cta" href="https://drive.google.com/drive/folders/1DI89clL2RyHBQMP-ttzPDIMkVv0PATh8" target="_blank" rel="noopener">Sign a Petition &#8594;</a>
+        </div>
+      </div>
+
+      <!-- Card 3: image left -->
+      <div class="amb-row">
+        <div class="amb-row__img-wrap">
+          <img class="amb-row__img" src="/ambassador/amplify-ik101-m5KvXMZDPniPJOWV.png" alt="Amplify IK101 Voices" loading="lazy" />
+        </div>
+        <div class="amb-row__body">
+          <h2 class="amb-row__heading">Amplify IK101 Voices</h2>
+          <p class="amb-row__text">IK101 movement thrives on collective voices. Join the action and propel positive change. Explore and download community-contributed videos and images from our digital gallery. Tag #IK101 and share these power stories on your social channels.</p>
+          <a class="amb-row__cta" href="https://drive.google.com/drive/folders/1a2c0ytJWwS6TrfBuLLfH1DeQUCcRBFio" target="_blank" rel="noopener">Amplify IK101 Voices &#8594;</a>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- CLOSING STATEMENT -->
+    <section class="amb-close">
+      <p class="amb-statement">My Voice, My Pakistan, My Movement.</p>
+    </section>
+
+  </main>
+
+  <footer class="amb-foot">
+    <nav class="amb-foot-links">
+      <a href="/">Resources</a><a href="/">Connect</a><a href="/">Useful Links</a>
+    </nav>
+    <p class="amb-foot-copy">IK101 © 2023</p>
+  </footer>
+
+  <style is:global>
+    /* ── Ambassador page — all classes prefixed .amb- ── */
+
+    .amb {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: clamp(2rem, 5vw, 4rem) 1.25rem 2rem;
+    }
+
+    /* HERO */
+    .amb-hero {
+      text-align: center;
+      max-width: 66ch;
+      margin: 0 auto clamp(3.5rem, 8vw, 6rem);
+    }
+    .amb-eyebrow {
+      color: var(--accent);
+      font-weight: 600;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      font-size: .8rem;
+      margin: 0 0 1rem;
+    }
+    .amb-title {
+      font-size: clamp(2rem, 4.6vw, 3.4rem);
+      line-height: 1.06;
+      letter-spacing: -.025em;
+      font-weight: 700;
+      margin: 0 auto 1.1rem;
+      max-width: 22ch;
+    }
+    .amb-lede {
+      color: var(--muted);
+      font-size: 1.05rem;
+      line-height: 1.6;
+      max-width: 60ch;
+      margin: 0 auto 2.2rem;
+    }
+    .amb-ctas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .9rem;
+      justify-content: center;
+    }
+    .amb-cta {
+      display: inline-block;
+      font-weight: 600;
+      font-size: .95rem;
+      text-decoration: none;
+      padding: .85rem 1.8rem;
+      border-radius: 100px;
+      transition: transform .2s var(--ease-out), filter .2s;
+    }
+    .amb-cta:hover {
+      transform: translateY(-1px);
+    }
+    .amb-cta--primary {
+      background: var(--accent);
+      color: var(--ink);
+    }
+    .amb-cta--primary:hover {
+      filter: brightness(1.06);
+    }
+    .amb-cta--outline {
+      background: transparent;
+      color: var(--ink);
+      border: 1.5px solid var(--ink);
+    }
+    .amb-cta--outline:hover {
+      background: var(--faint);
+    }
+
+    /* FEATURE ROWS */
+    .amb-features {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(3rem, 8vw, 6rem);
+    }
+    .amb-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(2rem, 5vw, 4.5rem);
+      align-items: center;
+    }
+    /* flip: image goes right (visually) via column-reverse */
+    .amb-row--flip {
+      direction: rtl;
+    }
+    .amb-row--flip > * {
+      direction: ltr;
+    }
+    .amb-row__img-wrap {
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 20px 56px rgba(20, 40, 28, .13);
+      aspect-ratio: 4 / 3;
+      background: #f1f5f2;
+    }
+    .amb-row__img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .amb-row__body {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .amb-row__heading {
+      font-size: clamp(1.4rem, 2.6vw, 2rem);
+      font-weight: 700;
+      letter-spacing: -.02em;
+      line-height: 1.15;
+      margin: 0;
+    }
+    .amb-row__text {
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.65;
+      margin: 0;
+    }
+    .amb-row__cta {
+      display: inline-block;
+      color: var(--accent);
+      font-weight: 600;
+      font-size: .95rem;
+      text-decoration: none;
+      padding: .7rem 1.5rem;
+      border: 1.5px solid var(--accent);
+      border-radius: 100px;
+      align-self: flex-start;
+      transition: background .2s var(--ease-out), color .2s, transform .2s var(--ease-out);
+    }
+    .amb-row__cta:hover {
+      background: var(--accent);
+      color: var(--ink);
+      transform: translateY(-1px);
+    }
+
+    /* CLOSING STATEMENT */
+    .amb-close {
+      margin-top: clamp(4rem, 10vw, 7rem);
+      text-align: center;
+    }
+    .amb-statement {
+      font-size: clamp(1.6rem, 4vw, 2.6rem);
+      font-weight: 700;
+      letter-spacing: -.02em;
+      margin: 0;
+    }
+
+    /* FOOTER */
+    .amb-foot {
+      border-top: 1px solid var(--faint);
+      margin-top: clamp(3rem, 8vw, 6rem);
+      padding: 3rem 1.25rem;
+      text-align: center;
+    }
+    .amb-foot-links {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+    }
+    .amb-foot-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: .9rem;
+    }
+    .amb-foot-links a:hover {
+      color: var(--ink);
+    }
+    .amb-foot-copy {
+      color: var(--muted);
+      font-size: .8rem;
+      margin: 0;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 720px) {
+      .amb-row,
+      .amb-row--flip {
+        grid-template-columns: 1fr;
+        direction: ltr;
+      }
+      .amb-row--flip > * {
+        direction: ltr;
+      }
+      .amb-row__img-wrap {
+        aspect-ratio: 16 / 10;
+      }
+      .amb-row__cta {
+        align-self: stretch;
+        text-align: center;
+      }
+    }
+  </style>
+</Layout>

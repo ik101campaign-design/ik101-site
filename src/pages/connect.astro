@@ -1,0 +1,339 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SiteNav from '../components/SiteNav.astro';
+
+const socials = [
+  {
+    label: 'X / Twitter',
+    handle: '@ik101campaign',
+    url: 'https://twitter.com/ik101campaign',
+    icon: 'X',
+  },
+  {
+    label: 'Facebook',
+    handle: 'ik101campaign',
+    url: 'https://www.facebook.com/ik101campaign',
+    icon: 'f',
+  },
+  {
+    label: 'YouTube',
+    handle: '@ik101campaign',
+    url: 'https://youtube.com/@ik101campaign',
+    icon: '▶',
+  },
+  {
+    label: 'TikTok',
+    handle: '@ik101community',
+    url: 'https://www.tiktok.com/@ik101community',
+    icon: '♪',
+  },
+];
+
+const resources = [
+  { label: 'AI 4 IK101', url: 'https://drive.google.com/drive/folders/1SG9XBBLVZOWCMpA94GON1lXJLjZhDtup' },
+  { label: 'Digital Gallery', url: 'https://drive.google.com/drive/folders/1a2c0ytJWwS6TrfBuLLfH1DeQUCcRBFio' },
+  { label: 'Flyers', url: 'https://drive.google.com/drive/folders/19sCV_szcgj98W98Kk7HI9XcjgLPikGLR' },
+  { label: 'Truth 2 Power Hub', url: 'https://www.youtube.com/@truth2powerhub' },
+];
+
+const MAIL_URL = 'mailto:info@ik101.org';
+---
+<Layout title="Connect | IK101">
+  <SiteNav current="/connect" />
+
+  <main class="con">
+    <header class="con__head">
+      <p class="con__eyebrow">Connect</p>
+      <h1 class="con__title">Get in touch with the IK101 community.</h1>
+      <p class="con__lede">If you have a question, comment, or suggestion, please send us a message – we'd love to hear from you.</p>
+    </header>
+
+    <!-- Social grid -->
+    <section class="con__section">
+      <p class="con__section-label">Follow us</p>
+      <div class="con__socials">
+        {socials.map((s) => (
+          <a class="con__card" href={s.url} target="_blank" rel="noopener">
+            <span class="con__card-icon" aria-hidden="true">{s.icon}</span>
+            <span class="con__card-label">{s.label}</span>
+            <span class="con__card-handle">{s.handle}</span>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <!-- Contact / message form -->
+    <section class="con__section">
+      <p class="con__section-label">Send a message</p>
+      <div class="con__form-wrap">
+        <form class="con__form" action={MAIL_URL} method="get">
+          <label class="con__label" for="con-name">Name<span class="con__req">*</span></label>
+          <input class="con__input" id="con-name" type="text" name="subject" placeholder="Enter your name" required />
+
+          <label class="con__label" for="con-email">Email address<span class="con__req">*</span></label>
+          <input class="con__input" id="con-email" type="email" name="email" placeholder="Enter your email" required />
+
+          <label class="con__label" for="con-msg">Message<span class="con__req">*</span></label>
+          <textarea class="con__textarea" id="con-msg" name="body" placeholder="Enter your message" rows="5" required></textarea>
+
+          <button class="con__submit" type="submit">Send message</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Resource links -->
+    <section class="con__section">
+      <p class="con__section-label">Resources</p>
+      <div class="con__resources">
+        {resources.map((r) => (
+          <a class="con__resource-link" href={r.url} target="_blank" rel="noopener">{r.label}</a>
+        ))}
+      </div>
+    </section>
+
+    <section class="con__close">
+      <p class="con__statement">My Voice, My Pakistan, My Movement.</p>
+    </section>
+  </main>
+
+  <footer class="con__foot">
+    <nav class="con__foot-links">
+      <a href="/#resources">Resources</a><a href="/connect">Connect</a><a href="/useful-links">Useful Links</a>
+    </nav>
+    <p class="con__foot-copy">IK101 &copy; 2023</p>
+  </footer>
+
+  <style is:global>
+    .con {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: clamp(2rem, 5vw, 4rem) 1.25rem 2rem;
+      text-align: center;
+    }
+
+    /* Hero */
+    .con__head {
+      max-width: 58ch;
+      margin: 0 auto clamp(3rem, 7vw, 5rem);
+    }
+    .con__eyebrow {
+      color: var(--accent);
+      font-weight: 600;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      font-size: .8rem;
+      margin: 0 0 1rem;
+    }
+    .con__title {
+      font-size: clamp(2rem, 4.6vw, 3.4rem);
+      line-height: 1.06;
+      letter-spacing: -.025em;
+      font-weight: 700;
+      margin: 0 auto 1.1rem;
+      max-width: 22ch;
+    }
+    .con__lede {
+      color: var(--muted);
+      font-size: 1.05rem;
+      line-height: 1.62;
+      margin: 0 auto;
+    }
+
+    /* Section label */
+    .con__section {
+      margin: 0 auto clamp(3rem, 7vw, 5rem);
+    }
+    .con__section-label {
+      color: var(--muted);
+      font-size: .8rem;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      margin: 0 0 1.5rem;
+    }
+
+    /* Social cards */
+    .con__socials {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1rem;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+    .con__card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .45rem;
+      padding: 1.6rem 1rem;
+      border: 1px solid var(--faint, rgba(0,0,0,.08));
+      border-radius: 16px;
+      text-decoration: none;
+      color: var(--ink);
+      background: #fff;
+      transition: border-color .2s, transform .2s var(--ease-out, ease), box-shadow .2s;
+    }
+    .con__card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 22px rgba(0,191,99,.12);
+    }
+    .con__card-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      background: var(--accent-soft, rgba(0,191,99,.1));
+      color: var(--accent);
+      font-size: 1rem;
+      font-weight: 700;
+      font-style: normal;
+    }
+    .con__card-label {
+      font-weight: 600;
+      font-size: .95rem;
+    }
+    .con__card-handle {
+      color: var(--muted);
+      font-size: .8rem;
+    }
+
+    /* Form */
+    .con__form-wrap {
+      max-width: 520px;
+      margin: 0 auto;
+      text-align: left;
+    }
+    .con__form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .con__label {
+      font-size: .85rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: .25rem;
+      display: block;
+    }
+    .con__req {
+      color: var(--accent);
+      margin-left: .15rem;
+    }
+    .con__input,
+    .con__textarea {
+      width: 100%;
+      padding: .85rem 1rem;
+      border: 1.5px solid var(--faint, rgba(0,0,0,.1));
+      border-radius: 10px;
+      font-size: .97rem;
+      color: var(--ink);
+      background: #fff;
+      transition: border-color .2s;
+      font-family: inherit;
+      box-sizing: border-box;
+    }
+    .con__input:focus,
+    .con__textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+    .con__textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+    .con__submit {
+      align-self: flex-start;
+      background: var(--accent);
+      color: var(--ink);
+      font-weight: 600;
+      font-size: .95rem;
+      padding: .9rem 2.1rem;
+      border: none;
+      border-radius: 100px;
+      cursor: pointer;
+      transition: transform .2s var(--ease-out, ease), filter .2s;
+      font-family: inherit;
+    }
+    .con__submit:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.05);
+    }
+
+    /* Resources */
+    .con__resources {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .65rem;
+      justify-content: center;
+      max-width: 620px;
+      margin: 0 auto;
+    }
+    .con__resource-link {
+      display: inline-block;
+      padding: .6rem 1.3rem;
+      border: 1px solid var(--faint, rgba(0,0,0,.1));
+      border-radius: 100px;
+      font-size: .92rem;
+      font-weight: 500;
+      color: var(--ink);
+      text-decoration: none;
+      background: #fff;
+      transition: background .2s, border-color .2s, color .2s, transform .2s var(--ease-out, ease);
+    }
+    .con__resource-link:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+      transform: translateY(-1px);
+    }
+
+    /* Closing */
+    .con__close {
+      margin-top: clamp(1rem, 3vw, 2rem);
+    }
+    .con__statement {
+      font-size: clamp(1.6rem, 4vw, 2.6rem);
+      font-weight: 700;
+      letter-spacing: -.02em;
+      margin: 0;
+    }
+
+    /* Footer */
+    .con__foot {
+      border-top: 1px solid var(--faint, rgba(0,0,0,.08));
+      margin-top: clamp(3rem, 8vw, 6rem);
+      padding: 3rem 1.25rem;
+      text-align: center;
+    }
+    .con__foot-links {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+    }
+    .con__foot-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: .9rem;
+    }
+    .con__foot-links a:hover { color: var(--ink); }
+    .con__foot-copy {
+      color: var(--muted);
+      font-size: .8rem;
+      margin: 0;
+    }
+
+    @media (max-width: 480px) {
+      .con__socials {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .con__submit {
+        align-self: stretch;
+        text-align: center;
+      }
+    }
+  </style>
+</Layout>

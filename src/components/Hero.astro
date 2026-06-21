@@ -3,16 +3,6 @@ import { getEntry } from 'astro:content';
 const hero = await getEntry('hero', 'main');
 const c = hero.data;
 ---
-<header class="nav">
-  <a class="nav__logo" href="/">IK101</a>
-  <nav class="nav__links">
-    <button class="nav__link" type="button">Spirit</button>
-    <button class="nav__link" type="button">Resources</button>
-    <button class="nav__link" type="button">Connect</button>
-  </nav>
-  <button class="nav__cta" data-globe-cta type="button">Add your voice</button>
-</header>
-
 <section class="hero">
   <button class="hero__pill" type="button" data-scroll-globe>
     <span>{c.eyebrow}</span>
@@ -30,12 +20,6 @@ const c = hero.data;
 
 <script>
   import('../components/hero/island.ts').then((m) => m.mountHero());
-  const nav = document.querySelector('.nav');
-  if (nav) {
-    const onScroll = () => nav.classList.toggle('is-float', window.scrollY > 24);
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
-  }
   document.querySelectorAll('[data-scroll-globe]').forEach((b) =>
     b.addEventListener('click', () =>
       document.getElementById('globe')?.scrollIntoView({ behavior: 'smooth', block: 'center' }),

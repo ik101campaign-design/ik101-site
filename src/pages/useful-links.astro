@@ -1,0 +1,272 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SiteNav from '../components/SiteNav.astro';
+
+const resourceLinks = [
+  { label: 'azaadvote.com', url: 'https://azaadvote.com' },
+  { label: 'Citizens Against State Torture', url: 'https://www.citizensagainststatetorture.co.uk' },
+  { label: 'Democracy Watch Pakistan', url: 'https://democracywatchpakistan.com/' },
+  { label: 'Free Imran Khan', url: 'https://freeimrankhan.com/' },
+  { label: 'Imran Khan: news, videos, reports and analysis', url: 'https://www.france24.com/en/tag/imran-khan/' },
+  { label: 'Global Petition', url: 'https://opvoters.good.do/fairelections/Global/' },
+  { label: 'Pak Voter', url: 'https://pakvoter.org/' },
+];
+
+const globalPerspectives = [
+  { label: 'The man Pakistan can jail but not erase', pub: 'Washington Post (2026)', url: 'https://www.washingtonpost.com/opinions/2026/04/21/imran-khan-backers-keep-pakistan-most-famous-prisoner-public-eye/?utm_source=chatgpt.com' },
+  { label: 'Prisoner Number 804: the plot to erase Imran Khan', pub: 'The Guardian (2026)', url: 'https://www.theguardian.com/world/2026/mar/24/prisoner-number-804-pakistan-plot-to-erase-imran-khan' },
+  { label: "Imran Khan warns Pakistan's election could be a farce", pub: 'The Economist (2024)', url: 'https://www.economist.com/by-invitation/2024/01/04/imran-khan-warns-that-pakistans-election-could-be-a-farce' },
+  { label: "Pakistan's democracy, its military, and America", pub: 'Brookings Institution (2024)', url: 'https://www.brookings.edu/articles/pakistans-democracy-its-military-and-america/' },
+  { label: "The Military Disrupts Pakistan's Democracy Once Again", pub: 'Carnegie Russia Eurasia Center (2023)', url: 'https://carnegieendowment.org/russia-eurasia/posts/2023/05/the-military-disrupts-pakistans-democracy-once-again' },
+  { label: "Imran Khan loses his battle with Pakistan's army", pub: 'The Economist (2023)', url: 'https://www.economist.com/asia/2023/06/01/imran-khan-loses-his-battle-with-pakistans-army' },
+  { label: "Why Imran Khan Isn't Going Away", pub: 'Carnegie Endowment for International Peace (2022)', url: 'https://carnegieendowment.org/posts/2022/04/why-imran-khan-isnt-going-away' },
+];
+---
+<Layout title="Useful Links | IK101">
+  <SiteNav current="/useful-links" />
+
+  <main class="lnk-page">
+
+    <!-- HERO -->
+    <section class="lnk-hero">
+      <p class="lnk-eyebrow">Useful Links</p>
+      <h1 class="lnk-title">Resources for truth, democracy &amp; justice.</h1>
+      <p class="lnk-lede">Explore the following links for useful information. IK101 is not responsible for the content featured on external websites.</p>
+    </section>
+
+    <!-- RESOURCE LINKS SECTION -->
+    <section class="lnk-section">
+      <ul class="lnk-list" aria-label="Resource links">
+        {resourceLinks.map((link) => (
+          <li class="lnk-item">
+            <a class="lnk-card" href={link.url} target="_blank" rel="noopener">
+              <span class="lnk-card__label">{link.label}</span>
+              <span class="lnk-card__arrow" aria-hidden="true">↗</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <!-- GLOBAL PERSPECTIVES SECTION -->
+    <section class="lnk-section lnk-section--perspectives">
+      <header class="lnk-section__head">
+        <h2 class="lnk-section__title">Global Perspectives</h2>
+        <p class="lnk-section__desc">A curated collection of opinion pieces, editorials, and policy analysis from leading global media and think tanks. All content remains the property of original publishers.</p>
+      </header>
+      <ul class="lnk-list" aria-label="Global perspectives">
+        {globalPerspectives.map((link) => (
+          <li class="lnk-item">
+            <a class="lnk-card lnk-card--press" href={link.url} target="_blank" rel="noopener">
+              <span class="lnk-card__body">
+                <span class="lnk-card__label">{link.label}</span>
+                <span class="lnk-card__pub">— {link.pub}</span>
+              </span>
+              <span class="lnk-card__arrow" aria-hidden="true">↗</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <!-- CLOSE STATEMENT -->
+    <section class="lnk-close">
+      <p class="lnk-statement">My Voice, My Pakistan, My Movement.</p>
+    </section>
+
+  </main>
+
+  <footer class="lnk-foot">
+    <nav class="lnk-foot__links">
+      <a href="/">Resources</a>
+      <a href="/">Connect</a>
+      <a href="/useful-links">Useful Links</a>
+    </nav>
+    <p class="lnk-foot__copy">IK101 &copy; 2023</p>
+  </footer>
+
+  <style is:global>
+    /* ── Page shell ── */
+    .lnk-page {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: clamp(2rem, 5vw, 4rem) 1.25rem 2rem;
+      text-align: center;
+    }
+
+    /* ── Hero ── */
+    .lnk-hero {
+      max-width: 58ch;
+      margin: 0 auto clamp(3rem, 7vw, 5rem);
+    }
+    .lnk-eyebrow {
+      color: var(--accent);
+      font-weight: 600;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      font-size: .8rem;
+      margin: 0 0 1rem;
+    }
+    .lnk-title {
+      font-size: clamp(2rem, 4.6vw, 3.4rem);
+      line-height: 1.06;
+      letter-spacing: -.025em;
+      font-weight: 700;
+      margin: 0 0 1.1rem;
+    }
+    .lnk-lede {
+      color: var(--muted);
+      font-size: 1.05rem;
+      line-height: 1.62;
+      margin: 0;
+    }
+
+    /* ── Section ── */
+    .lnk-section {
+      margin-bottom: clamp(3rem, 7vw, 5rem);
+    }
+    .lnk-section--perspectives {
+      text-align: left;
+    }
+    .lnk-section__head {
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+    .lnk-section__title {
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      font-weight: 700;
+      letter-spacing: -.02em;
+      margin: 0 0 .6rem;
+    }
+    .lnk-section__desc {
+      color: var(--muted);
+      font-size: .95rem;
+      line-height: 1.6;
+      max-width: 58ch;
+      margin: 0 auto;
+    }
+
+    /* ── Link list ── */
+    .lnk-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: .5rem;
+    }
+    .lnk-item {
+      /* just the list row */
+    }
+
+    /* ── Link card ── */
+    .lnk-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1rem 1.25rem;
+      border: 1px solid var(--faint);
+      border-radius: 10px;
+      text-decoration: none;
+      color: var(--ink);
+      background: #fff;
+      transition: border-color .2s var(--ease-out), background .2s, transform .15s var(--ease-out), box-shadow .2s;
+    }
+    .lnk-card:hover {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(0, 191, 99, .1);
+    }
+    .lnk-card:hover .lnk-card__arrow {
+      color: var(--accent);
+    }
+
+    .lnk-card__label {
+      font-weight: 500;
+      font-size: 1rem;
+      line-height: 1.4;
+    }
+    .lnk-card__arrow {
+      flex-shrink: 0;
+      color: var(--muted);
+      font-size: .95rem;
+      transition: color .2s, transform .2s;
+    }
+    .lnk-card:hover .lnk-card__arrow {
+      transform: translate(2px, -2px);
+    }
+
+    /* Press-style cards with publication */
+    .lnk-card--press {
+      align-items: flex-start;
+    }
+    .lnk-card--press .lnk-card__arrow {
+      margin-top: .15rem;
+    }
+    .lnk-card__body {
+      display: flex;
+      flex-direction: column;
+      gap: .2rem;
+      min-width: 0;
+    }
+    .lnk-card__pub {
+      font-size: .82rem;
+      color: var(--muted);
+      font-weight: 400;
+    }
+
+    /* ── Close statement ── */
+    .lnk-close {
+      margin-top: clamp(3rem, 8vw, 6rem);
+      text-align: center;
+    }
+    .lnk-statement {
+      font-size: clamp(1.6rem, 4vw, 2.6rem);
+      font-weight: 700;
+      letter-spacing: -.02em;
+      margin: 0;
+    }
+
+    /* ── Footer ── */
+    .lnk-foot {
+      border-top: 1px solid var(--faint);
+      margin-top: clamp(3rem, 8vw, 6rem);
+      padding: 3rem 1.25rem;
+      text-align: center;
+    }
+    .lnk-foot__links {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+    }
+    .lnk-foot__links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: .9rem;
+    }
+    .lnk-foot__links a:hover {
+      color: var(--ink);
+    }
+    .lnk-foot__copy {
+      color: var(--muted);
+      font-size: .8rem;
+      margin: 0;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .lnk-card__label {
+        font-size: .95rem;
+      }
+      .lnk-foot__links {
+        gap: 1.25rem;
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .lnk-card { transition: none; }
+    }
+  </style>
+</Layout>

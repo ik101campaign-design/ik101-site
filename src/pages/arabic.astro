@@ -1,0 +1,638 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SiteNav from '../components/SiteNav.astro';
+
+const POSTCARD_URL   = 'https://drive.google.com/drive/folders/1U-Hio0z8I7dBizlwHgXtVcZM2jLeFCjj';
+const PETITION_URL   = 'https://drive.google.com/drive/folders/1DI89clL2RyHBQMP-ttzPDIMkVv0PATh8';
+const GALLERY_URL    = 'https://drive.google.com/drive/folders/1a2c0ytJWwS6TrfBuLLfH1DeQUCcRBFio';
+const ARTIST_URL     = 'https://drive.google.com/drive/folders/1qpAxa80_9z03Q6vyzGRJFWO4qHtNtT24';
+const ARTWORK_URL    = 'https://docs.google.com/forms/d/e/1FAIpQLScp3ky9BpBUM6DvEQssAeDiVJEvlNFmRbzeR8mxSSFng5_4yQ/viewform';
+const VOLUNTEER_URL  = 'https://docs.google.com/forms/d/e/1FAIpQLSdOwDOVHxvIIrH_HKSXcstQbiW_ibtkKkk_5q-zt2is7H1ulQ/viewform';
+const VISIONS_URL    = 'https://drive.google.com/drive/folders/1aK4u7ohzy-2qYrll0n39q-cKwwpFnqmj';
+---
+<Layout title="آي كي ١٠١ | IK101 (Arabic)">
+  <SiteNav current="/arabic" />
+
+  <main dir="rtl" lang="ar" class="lng-ar-main">
+
+    <!-- ── HERO ── -->
+    <section class="lng-ar-hero">
+      <p class="lng-ar-eyebrow">IK101</p>
+      <h1 class="lng-ar-title">من إرث عمران خان إلى أفعالك</h1>
+
+      <h2 class="lng-ar-sub">101 شرارة من أجل باكستان تقدمية</h2>
+      <h3 class="lng-ar-lede">
+        هي مبادرة للمواطنين تحتفل بسعي عمران خان من أجل باكستان موحدة أقوى وتدعو
+        "101 شرارة التقدم" لإعادة البناء بشكل جماعي ۔
+      </h3>
+
+      <img
+        class="lng-ar-hero-img"
+        src="/arabic/101-sparks-ur-mnl3wxg0OjU9J7JP.png"
+        alt="101 شرارة"
+        loading="eager"
+      />
+    </section>
+
+    <!-- ── CORE SPIRIT ── -->
+    <section class="lng-ar-spirit">
+      <p class="lng-ar-eyebrow">الروح الأساسية</p>
+      <h2 class="lng-ar-spirit-title">الروح الأساسية لـ IK101</h2>
+      <h3 class="lng-ar-spirit-body">
+        في قلب IK101 يتردد صدى الإرث الدائم لعمران خان، وهو حياة مكرسة للسعي لتحقيق
+        دولة الرفاهية حيث لا يتم الاعتراف بحقوق كل فرد فحسب، بل يتم حمايتها بشدة.
+        IK101 هي دعوة لإسماع صوتك والتواصل مع المواطنين على مستوى العالم والمساهمة
+        في بناء باكستان المستقلة والديمقراطية والتقدمية حقًا۔
+      </h3>
+      <p class="lng-ar-spirit-para">
+        ليس من الضروري أن تكون في مكان واحد لتكون جزءًا من IK101. انطلق إلى الحدث
+        بدءًا من المشاركة الشعبية وحتى المرحلة الديناميكية لـ IK101 Engage، وهي منصة
+        تنبض فيها أفكارك لتحقيق التقدم بالحياة. قم بإثراء معرضنا الرقمي، وشارك
+        رواياتك وإلهاماتك، ودعنا نعرض قوة الأصوات الجماعية. انضم للحركة!
+      </p>
+    </section>
+
+    <!-- ── GRASSROOTS ACTIVISM ── -->
+    <section class="lng-ar-activism">
+      <img
+        class="lng-ar-activism-img"
+        src="/arabic/slider-grassroots-activation-ur-AQEJrLPzB1UgynEe.png"
+        alt="النشاط الشعبي"
+        loading="lazy"
+      />
+      <div class="lng-ar-activism-body">
+        <p class="lng-ar-eyebrow">انضم إلينا</p>
+        <h2 class="lng-ar-activism-title">انضم إلينا في رحلة النشاط الشعبي</h2>
+      </div>
+    </section>
+
+    <!-- ── AMBASSADOR ── -->
+    <section class="lng-ar-ambassador" id="arabic-amb">
+      <p class="lng-ar-eyebrow">السفير</p>
+      <h2 class="lng-ar-amb-title">كن سفيرً ا لـ ۱۰۱</h2>
+      <h3 class="lng-ar-amb-lede">
+        في العمل، حيث تتنقل من باب إلى باب وتنشر رسالة القيادة الإيجابية والتغيير.
+        كل خطوة وكل محادثة مهمة. إن التزامكم يشكل السرد، ومعاً، سوف نبني باكستان
+        موحدة ومرنة ۔
+      </h3>
+
+      <!-- 3 action cards -->
+      <div class="lng-ar-actions">
+
+        <!-- Card 1: أرسل بطاقة بريدية -->
+        <div class="lng-ar-action-card">
+          <img
+            class="lng-ar-action-img"
+            src="/arabic/slider-mail-a-postcard-ur-mxBrg6oGbRc3w74P.png"
+            alt="أرسل بطاقة بريدية"
+            loading="lazy"
+          />
+          <div class="lng-ar-action-body">
+            <h6 class="lng-ar-action-label">أرسل بطاقة بريدية</h6>
+            <p class="lng-ar-action-text">
+              جاهز لتصنع الفارق؟ انضم إلى حركة IK101 باستخدام بطاقة بريدية ديناميكية
+              لإثارة محادثة حول التغيير الإيجابي. قم بتنزيل وطباعة قالب من اختيارك،
+              باللغة التي تختارها، وسلط الضوء على إنجاز عمران خان الأكثر تأثيرًا
+              والذي يتردد صداه معك، وقدم فكرتك الفريدة للتقدم وأرسل البطاقة البريدية
+              بالبريد إلى أحد المؤثرين في المجتمع ۔
+            </p>
+            <a class="lng-ar-pill-btn" href={POSTCARD_URL} target="_blank" rel="noopener">
+              احصل بطاق بريدية &#8592;
+            </a>
+          </div>
+        </div>
+
+        <!-- Card 2: توقيع عريضة -->
+        <div class="lng-ar-action-card lng-ar-action-card--flip">
+          <img
+            class="lng-ar-action-img"
+            src="/arabic/slider-sign-a-petition-ur-YZ9236BLxpceJ87Z.png"
+            alt="توقيع عريضة"
+            loading="lazy"
+          />
+          <div class="lng-ar-action-body">
+            <h6 class="lng-ar-action-label">توقيع عريضة</h6>
+            <p class="lng-ar-action-text">
+              استغل قوة نفوذك للدفاع عن الديمقراطية في باكستان، والمطالبة بإنهاء
+              الفاشية ضد سادس أكبر حزب سياسي في العالم، والاحتجاج على الاعتقال غير
+              القانوني لعمران خان، الزعيم الأكثر شعبية في باكستان. تنزيل القوالب؛ أضف
+              أفكارك وشارك نداءك مع الممثلين السياسيين المحليين والسفراء شخصيات
+              مؤثرة ۔
+            </p>
+            <a class="lng-ar-pill-btn" href={PETITION_URL} target="_blank" rel="noopener">
+              قم بالتوقيع على الطلب &#8592;
+            </a>
+          </div>
+        </div>
+
+        <!-- Card 3: تضخيم صوتنا -->
+        <div class="lng-ar-action-card">
+          <img
+            class="lng-ar-action-img"
+            src="/arabic/slider-amplify-online-ur-AE0pb8Q9gXSqEEXD.png"
+            alt="تضخيم صوتنا"
+            loading="lazy"
+          />
+          <div class="lng-ar-action-body">
+            <h6 class="lng-ar-action-label">تضخيم صوتنا</h6>
+            <p class="lng-ar-action-text">
+              تزدهر حركة IK101 بالأصوات الجماعية. انضم إلى العمل وادفع التغيير
+              الإيجابي. استكشف وقم بتنزيل مقاطع الفيديو والصور التي يساهم بها المجتمع
+              من معرضنا الرقمي. ضع علامة على #IK101 وشارك قصص القوة هذه على قنواتك
+              الاجتماعية ۔
+            </p>
+            <a class="lng-ar-pill-btn" href={GALLERY_URL} target="_blank" rel="noopener">
+              ڈیجیٹل گیلری &#8592;
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── ARTIST ── -->
+    <section class="lng-ar-artist" id="arabic-artist">
+      <div class="lng-ar-artist-inner">
+        <div class="lng-ar-artist-img-wrap">
+          <img
+            class="lng-ar-artist-img"
+            src="/arabic/ik101-artist-call-mjE2XxoN7Rs1ZwqE.png"
+            alt="دع فنك يكون صوت التغيير"
+            loading="lazy"
+          />
+        </div>
+        <div class="lng-ar-artist-body">
+          <p class="lng-ar-eyebrow">الفنان</p>
+          <h2 class="lng-ar-artist-title">دع فنك يكون صوت التغيير!</h2>
+          <h3 class="lng-ar-artist-lede">
+            لوحاتك تدعو للتغيير! المساهمة التقليدية عمل فني أو مشاريع رقمية لحركة
+            #IK101 ويكون جزء من الثورة البصرية سيتم عرض الفن الخاص بك عبر منصات
+            متعددة بما في ذلك البطاقات البريدية العالمية، والحقيقة ل Power Hub ووسائل
+            التواصل الاجتماعي وما إلى ذلك لنشر رسائل الديمقراطية والتربية المدنية
+            وحقوق الإنسان ۔
+          </h3>
+          <div class="lng-ar-artist-ctas">
+            <a class="lng-ar-btn-primary" href={ARTIST_URL} target="_blank" rel="noopener">آرٹسٹ کال</a>
+            <a class="lng-ar-btn-outline" href={ARTWORK_URL} target="_blank" rel="noopener">فن پارہ جمع کرائیں</a>
+            <a class="lng-ar-btn-outline" href={VISIONS_URL} target="_blank" rel="noopener">تصورات</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── VOLUNTEER ── -->
+    <section class="lng-ar-volunteer" id="arabic-vol">
+      <div class="lng-ar-volunteer-inner">
+        <div class="lng-ar-volunteer-body">
+          <p class="lng-ar-eyebrow">المتطوع</p>
+          <h2 class="lng-ar-vol-title">سجل كمتطوع</h2>
+          <h3 class="lng-ar-vol-lede">
+            تطوع في مجال خبرتك. أرسل لنا بريدًا إلكترونيًا لذلك نحن يمكن تنسيق
+            مساهمتك. تسليط الضوء على المهارات الخاصة بك: الترجمة، الترجمة، التدقيق
+            اللغوي، المجتمع المحلي التنشيط، الإعلانات الرقمية، تصميم الجرافيك والفيديو،
+            وسائل التواصل الاجتماعي التسويق الإعلامي والبحث وكتابة المدونات والطباعة
+            توزيع ۔
+          </h3>
+          <a class="lng-ar-btn-primary" href={VOLUNTEER_URL} target="_blank" rel="noopener">
+            استمارة تسجيل المتطوعين
+          </a>
+        </div>
+        <div class="lng-ar-volunteer-img-wrap">
+          <img
+            class="lng-ar-volunteer-img"
+            src="/arabic/ik101-student---1-d95pL2wNZBTvbDQo.png"
+            alt="سجل كمتطوع"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- ── CLOSING ── -->
+    <section class="lng-ar-close">
+      <h4 class="lng-ar-close-heading">دعونا نوحد أصواتنا لبناء باكستان ديمقراطية حقيقية</h4>
+      <p class="lng-ar-close-statement">My Voice, My Pakistan, My Movement.</p>
+    </section>
+
+  </main>
+
+  <footer class="lng-ar-foot">
+    <nav class="lng-ar-foot-links">
+      <a href="/#resources">Resources</a>
+      <a href="/connect">Connect</a>
+      <a href="/useful-links">Useful Links</a>
+    </nav>
+    <p class="lng-ar-foot-copy">IK101 &copy; 2023</p>
+  </footer>
+
+  <style is:global>
+    /* ── Arabic page — all classes prefixed .lng-ar- ── */
+
+    /* RTL base */
+    .lng-ar-main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: clamp(2rem, 5vw, 4rem) 1.25rem 2rem;
+      text-align: right;
+      font-family: inherit;
+    }
+
+    /* Arabic body text needs generous line-height */
+    .lng-ar-main p,
+    .lng-ar-main h3,
+    .lng-ar-main h2 {
+      line-height: 1.9;
+    }
+
+    /* Shared eyebrow */
+    .lng-ar-eyebrow {
+      color: var(--accent);
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      font-size: .8rem;
+      margin: 0 0 .75rem;
+      display: block;
+    }
+
+    /* Shared pill button — primary (green fill) */
+    .lng-ar-btn-primary {
+      display: inline-block;
+      background: var(--accent);
+      color: var(--ink);
+      font-weight: 600;
+      font-size: .95rem;
+      text-decoration: none;
+      padding: .85rem 1.8rem;
+      border-radius: 100px;
+      border: none;
+      transition: transform .2s var(--ease-out), filter .2s;
+    }
+    .lng-ar-btn-primary:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.06);
+    }
+
+    /* Shared pill button — outline */
+    .lng-ar-btn-outline {
+      display: inline-block;
+      background: transparent;
+      color: var(--ink);
+      font-weight: 600;
+      font-size: .95rem;
+      text-decoration: none;
+      padding: .85rem 1.8rem;
+      border-radius: 100px;
+      border: 1.5px solid var(--ink);
+      transition: transform .2s var(--ease-out), background .2s;
+    }
+    .lng-ar-btn-outline:hover {
+      background: var(--faint);
+      transform: translateY(-1px);
+    }
+
+    /* ── HERO ── */
+    .lng-ar-hero {
+      text-align: center;
+      max-width: 72ch;
+      margin: 0 auto clamp(3.5rem, 8vw, 6rem);
+    }
+    .lng-ar-title {
+      font-size: clamp(2rem, 5vw, 3.6rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -.02em;
+      margin: 0 0 1.2rem;
+      color: var(--ink);
+    }
+    .lng-ar-sub {
+      font-size: clamp(1.3rem, 2.8vw, 2rem);
+      font-weight: 700;
+      margin: 0 0 1rem;
+      color: var(--ink);
+    }
+    .lng-ar-lede {
+      font-size: 1.05rem;
+      color: var(--muted);
+      margin: 0 auto 2rem;
+      max-width: 66ch;
+      line-height: 1.9;
+    }
+    .lng-ar-hero-img {
+      width: 100%;
+      max-width: 860px;
+      border-radius: 16px;
+      display: block;
+      margin: 0 auto;
+      box-shadow: 0 16px 48px rgba(0,0,0,.1);
+    }
+
+    /* ── CORE SPIRIT ── */
+    .lng-ar-spirit {
+      background: var(--faint);
+      border-radius: 20px;
+      padding: clamp(2.5rem, 6vw, 5rem) clamp(1.5rem, 5vw, 4rem);
+      margin-bottom: clamp(3.5rem, 8vw, 6rem);
+    }
+    .lng-ar-spirit-title {
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      font-weight: 700;
+      margin: 0 0 1.2rem;
+      color: var(--ink);
+      line-height: 1.3;
+    }
+    .lng-ar-spirit-body {
+      font-size: 1.05rem;
+      color: var(--muted);
+      margin: 0 0 1.5rem;
+      font-weight: 400;
+    }
+    .lng-ar-spirit-para {
+      font-size: 1rem;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    /* ── GRASSROOTS ACTIVISM ── */
+    .lng-ar-activism {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(2rem, 5vw, 4rem);
+      align-items: center;
+      margin-bottom: clamp(3.5rem, 8vw, 6rem);
+    }
+    .lng-ar-activism-img {
+      width: 100%;
+      border-radius: 16px;
+      object-fit: cover;
+      aspect-ratio: 4/3;
+      display: block;
+      box-shadow: 0 16px 40px rgba(0,0,0,.1);
+    }
+    .lng-ar-activism-title {
+      font-size: clamp(1.4rem, 2.8vw, 2.2rem);
+      font-weight: 700;
+      line-height: 1.25;
+      margin: 0;
+      color: var(--ink);
+    }
+
+    /* ── AMBASSADOR ── */
+    .lng-ar-ambassador {
+      margin-bottom: clamp(3.5rem, 8vw, 6rem);
+    }
+    .lng-ar-amb-title {
+      font-size: clamp(1.6rem, 3.2vw, 2.4rem);
+      font-weight: 800;
+      margin: 0 0 1rem;
+      color: var(--ink);
+      line-height: 1.2;
+    }
+    .lng-ar-amb-lede {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 72ch;
+      margin: 0 0 3rem;
+      font-weight: 400;
+    }
+
+    /* Action cards grid */
+    .lng-ar-actions {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(2.5rem, 6vw, 5rem);
+    }
+    .lng-ar-action-card {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(2rem, 5vw, 4rem);
+      align-items: center;
+    }
+    /* Flip: even cards swap image to left */
+    .lng-ar-action-card--flip {
+      direction: ltr;
+    }
+    .lng-ar-action-card--flip > * {
+      direction: rtl;
+    }
+    .lng-ar-action-img {
+      width: 100%;
+      border-radius: 16px;
+      object-fit: cover;
+      aspect-ratio: 4/3;
+      display: block;
+      box-shadow: 0 20px 56px rgba(20,40,28,.13);
+      background: #f1f5f2;
+    }
+    .lng-ar-action-body {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .lng-ar-action-label {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin: 0;
+      line-height: 1.3;
+    }
+    .lng-ar-action-text {
+      font-size: 1rem;
+      color: var(--muted);
+      margin: 0;
+      line-height: 1.9;
+    }
+
+    /* CTA inside action card — pill outline/accent */
+    .lng-ar-pill-btn {
+      display: inline-block;
+      color: var(--accent);
+      font-weight: 600;
+      font-size: .95rem;
+      text-decoration: none;
+      padding: .7rem 1.5rem;
+      border: 1.5px solid var(--accent);
+      border-radius: 100px;
+      align-self: flex-start;
+      transition: background .2s var(--ease-out), color .2s, transform .2s var(--ease-out);
+    }
+    .lng-ar-pill-btn:hover {
+      background: var(--accent);
+      color: var(--ink);
+      transform: translateY(-1px);
+    }
+
+    /* ── ARTIST ── */
+    .lng-ar-artist {
+      background: var(--faint);
+      border-radius: 20px;
+      padding: clamp(2.5rem, 6vw, 5rem) clamp(1.5rem, 5vw, 4rem);
+      margin-bottom: clamp(3.5rem, 8vw, 6rem);
+    }
+    .lng-ar-artist-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(2rem, 5vw, 4rem);
+      align-items: center;
+    }
+    .lng-ar-artist-img-wrap {
+      border-radius: 16px;
+      overflow: hidden;
+      aspect-ratio: 4/3;
+      background: #f1f5f2;
+    }
+    .lng-ar-artist-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .lng-ar-artist-title {
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      font-weight: 800;
+      margin: 0 0 1rem;
+      color: var(--ink);
+      line-height: 1.2;
+    }
+    .lng-ar-artist-lede {
+      font-size: 1rem;
+      color: var(--muted);
+      margin: 0 0 1.5rem;
+      font-weight: 400;
+    }
+    .lng-ar-artist-ctas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .8rem;
+    }
+
+    /* ── VOLUNTEER ── */
+    .lng-ar-volunteer {
+      margin-bottom: clamp(3.5rem, 8vw, 6rem);
+    }
+    .lng-ar-volunteer-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(2rem, 5vw, 4rem);
+      align-items: center;
+    }
+    .lng-ar-vol-title {
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      font-weight: 800;
+      margin: 0 0 1rem;
+      color: var(--ink);
+      line-height: 1.25;
+    }
+    .lng-ar-vol-lede {
+      font-size: 1rem;
+      color: var(--muted);
+      margin: 0 0 1.5rem;
+      font-weight: 400;
+    }
+    .lng-ar-volunteer-img-wrap {
+      border-radius: 16px;
+      overflow: hidden;
+      aspect-ratio: 4/3;
+      background: #f1f5f2;
+      box-shadow: 0 20px 56px rgba(20,40,28,.13);
+    }
+    .lng-ar-volunteer-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* ── CLOSING ── */
+    .lng-ar-close {
+      border-top: 1px solid var(--faint);
+      margin-top: clamp(3rem, 8vw, 6rem);
+      padding-top: clamp(3rem, 6vw, 5rem);
+      text-align: center;
+    }
+    .lng-ar-close-heading {
+      font-size: clamp(1.2rem, 2.4vw, 1.7rem);
+      font-weight: 700;
+      color: var(--ink);
+      margin: 0 0 1.2rem;
+      line-height: 1.4;
+    }
+    .lng-ar-close-statement {
+      font-size: clamp(1.5rem, 3.5vw, 2.4rem);
+      font-weight: 800;
+      letter-spacing: -.02em;
+      margin: 0;
+      color: var(--ink);
+      /* intentionally in English/LTR */
+      direction: ltr;
+      unicode-bidi: embed;
+    }
+
+    /* ── FOOTER ── */
+    .lng-ar-foot {
+      border-top: 1px solid var(--faint);
+      margin-top: clamp(3rem, 6vw, 5rem);
+      padding: 2.5rem 1.25rem;
+      text-align: center;
+    }
+    .lng-ar-foot-links {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      margin-bottom: 1.2rem;
+    }
+    .lng-ar-foot-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: .9rem;
+    }
+    .lng-ar-foot-links a:hover {
+      color: var(--ink);
+    }
+    .lng-ar-foot-copy {
+      color: var(--muted);
+      font-size: .8rem;
+      margin: 0;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 760px) {
+      .lng-ar-activism,
+      .lng-ar-action-card,
+      .lng-ar-action-card--flip,
+      .lng-ar-artist-inner,
+      .lng-ar-volunteer-inner {
+        grid-template-columns: 1fr;
+        direction: rtl;
+      }
+      .lng-ar-action-card--flip > * {
+        direction: rtl;
+      }
+      .lng-ar-action-img,
+      .lng-ar-activism-img {
+        aspect-ratio: 16/10;
+      }
+      .lng-ar-artist-img-wrap,
+      .lng-ar-volunteer-img-wrap {
+        aspect-ratio: 16/10;
+      }
+      .lng-ar-pill-btn {
+        align-self: stretch;
+        text-align: center;
+      }
+      .lng-ar-artist-ctas {
+        flex-direction: column;
+      }
+      .lng-ar-artist-ctas a {
+        text-align: center;
+      }
+      .lng-ar-hero {
+        text-align: right;
+      }
+      .lng-ar-spirit,
+      .lng-ar-activist {
+        padding: 2rem 1.25rem;
+      }
+    }
+  </style>
+</Layout>

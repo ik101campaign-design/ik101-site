@@ -1,0 +1,209 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SiteNav from '../components/SiteNav.astro';
+
+const WAIVER_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSdOwDOVHxvIIrH_HKSXcstQbiW_ibtkKkk_5q-zt2is7H1ulQ/viewform';
+const BADGE_URL = 'https://drive.google.com/drive/folders/1jp9yv55ZTWD3st0FcCgBkHDa7WoU05_D';
+
+const skills = [
+  'Translation',
+  'Subtitling',
+  'Proof-reading',
+  'Local community activation',
+  'Digital advertising',
+  'Graphic & video design',
+  'Social media marketing',
+  'Research',
+  'Blog-writing',
+  'Printing & distribution',
+];
+---
+<Layout title="Volunteer | IK101">
+  <SiteNav current="/volunteer" />
+
+  <main class="vol">
+    <header class="vol__head">
+      <p class="vol__eyebrow">Volunteer</p>
+      <h1 class="vol__title">Ready to make a difference? Put your skills to work.</h1>
+      <p class="vol__lede">Volunteer in your field of expertise. Send us an email so we can coordinate your contribution. Highlight your skill(s): translation, subtitling, proof-reading, local community activation, digital advertising, graphic &amp; video design, social media marketing, research, blog-writing, printing &amp; distribution.</p>
+      <div class="vol__ctas">
+        <a class="vol__cta vol__cta--primary" href={WAIVER_URL} target="_blank" rel="noopener">Volunteer Waiver Form</a>
+        <a class="vol__cta vol__cta--secondary" href={BADGE_URL} target="_blank" rel="noopener">Election Volunteer Badge</a>
+      </div>
+    </header>
+
+    <section class="vol__skills">
+      <p class="vol__skills-label">Tell us where you fit:</p>
+      <ul class="vol__grid" aria-label="Ways you can help">
+        {skills.map((skill) => (
+          <li class="vol__chip">{skill}</li>
+        ))}
+      </ul>
+    </section>
+
+    <section class="vol__close">
+      <p class="vol__statement">My Voice, My Pakistan, My Movement.</p>
+    </section>
+  </main>
+
+  <footer class="vol__foot">
+    <nav class="vol__foot-links">
+      <a href="/">Resources</a><a href="/">Connect</a><a href="/">Useful Links</a>
+    </nav>
+    <p class="vol__foot-copy">IK101 &copy; 2023</p>
+  </footer>
+
+  <style is:global>
+    .vol {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: clamp(2rem, 5vw, 4rem) 1.25rem 2rem;
+      text-align: center;
+    }
+
+    /* Hero header */
+    .vol__head {
+      max-width: 58ch;
+      margin: 0 auto clamp(3rem, 7vw, 5rem);
+    }
+    .vol__eyebrow {
+      color: var(--accent);
+      font-weight: 600;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      font-size: .8rem;
+      margin: 0 0 1rem;
+    }
+    .vol__title {
+      font-size: clamp(2rem, 4.6vw, 3.4rem);
+      line-height: 1.06;
+      letter-spacing: -.025em;
+      font-weight: 700;
+      margin: 0 auto 1.1rem;
+      max-width: 22ch;
+    }
+    .vol__lede {
+      color: var(--muted);
+      font-size: 1.05rem;
+      line-height: 1.62;
+      margin: 0 auto 2.25rem;
+    }
+
+    /* CTA buttons */
+    .vol__ctas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .85rem;
+      justify-content: center;
+    }
+    .vol__cta {
+      display: inline-block;
+      font-weight: 600;
+      font-size: .95rem;
+      text-decoration: none;
+      padding: .85rem 1.9rem;
+      border-radius: 100px;
+      transition: transform .2s var(--ease-out), filter .2s, background .2s, color .2s;
+      white-space: nowrap;
+    }
+    .vol__cta--primary {
+      background: var(--accent);
+      color: var(--ink);
+    }
+    .vol__cta--primary:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.05);
+    }
+    .vol__cta--secondary {
+      background: transparent;
+      color: var(--ink);
+      border: 1.5px solid var(--ink);
+    }
+    .vol__cta--secondary:hover {
+      background: var(--ink);
+      color: #fff;
+      transform: translateY(-1px);
+    }
+
+    /* Skills section */
+    .vol__skills {
+      margin: 0 auto clamp(3rem, 8vw, 5.5rem);
+    }
+    .vol__skills-label {
+      color: var(--muted);
+      font-size: .85rem;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      margin: 0 0 1.4rem;
+    }
+    .vol__grid {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: .65rem;
+    }
+    .vol__chip {
+      display: inline-block;
+      background: var(--accent-soft, rgba(0,191,99,.08));
+      color: var(--ink);
+      border: 1px solid rgba(0, 191, 99, .22);
+      border-radius: 100px;
+      padding: .6rem 1.3rem;
+      font-size: .92rem;
+      font-weight: 500;
+      letter-spacing: .01em;
+      transition: background .2s, border-color .2s, transform .2s var(--ease-out);
+    }
+    .vol__chip:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: var(--ink);
+      transform: translateY(-1px);
+    }
+
+    /* Closing statement */
+    .vol__close {
+      margin-top: clamp(1rem, 3vw, 2rem);
+    }
+    .vol__statement {
+      font-size: clamp(1.6rem, 4vw, 2.6rem);
+      font-weight: 700;
+      letter-spacing: -.02em;
+      margin: 0;
+    }
+
+    /* Footer */
+    .vol__foot {
+      border-top: 1px solid var(--faint);
+      margin-top: clamp(3rem, 8vw, 6rem);
+      padding: 3rem 1.25rem;
+      text-align: center;
+    }
+    .vol__foot-links {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+    }
+    .vol__foot-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: .9rem;
+    }
+    .vol__foot-links a:hover { color: var(--ink); }
+    .vol__foot-copy {
+      color: var(--muted);
+      font-size: .8rem;
+      margin: 0;
+    }
+
+    @media (max-width: 480px) {
+      .vol__ctas { flex-direction: column; align-items: center; }
+      .vol__cta { width: 100%; max-width: 300px; text-align: center; }
+    }
+  </style>
+</Layout>

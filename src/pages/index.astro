@@ -1,5 +1,11 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import SiteNav from '../components/SiteNav.astro';
 import Hero from '../components/Hero.astro';
+import HomeSections from '../components/HomeSections.astro';
 ---
-<Layout title="IK101 — From his legacy to your action."><Hero /></Layout>
+<Layout title="IK101 — From his legacy to your action.">
+  <SiteNav current="/" />
+  <Hero />
+  <HomeSections />
+</Layout>
